@@ -106,7 +106,8 @@ var validOptionNames = [
   'numberOfRetries',
   'auto_reconnect',
   'minSize',
-  'monitorCommands'
+  'monitorCommands',
+  'retryWrites'
 ];
 
 var ignoreOptionNames = ['native_parser'];
@@ -386,7 +387,6 @@ MongoClient.prototype.db = function(dbName, options) {
  * Check if MongoClient is connected
  *
  * @method
- * @param {string} name The name of the database we want to use.
  * @param {object} [options=null] Optional settings.
  * @param {boolean} [options.noListener=false] Do not make the db an event listener to the original connection.
  * @param {boolean} [options.returnNonCachedInstance=false] Control if you want to return a cached instance or have a new one created
