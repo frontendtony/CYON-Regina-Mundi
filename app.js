@@ -28,6 +28,6 @@ app.get('/login', function(req, res) {
 // mongoose.connect("mongodb://localhost/cyon_v1");
 
 
-app.listen(8080, function() {
+app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', function() {
     console.log("CYON App Started")
 })
