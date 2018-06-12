@@ -9,6 +9,9 @@
   },
   "author": "Anthony Oyathelemhi",
   "license": "ISC",
+  "engines": {
+    "node": "8.11.1"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
