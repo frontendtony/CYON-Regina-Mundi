@@ -8,17 +8,22 @@ body {
     padding-top: 77px !important;
 }
 
-.login {
+/*.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top.header {*/
+/*    margin-bottom: 25px !important;*/
+/*}*/
+
+.login.register {
     display: flex;
-    align-items: center;
-    align-content: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
     height: 100%;
+    margin-top: 2vh;
 }
 
 .ui.raised.segment {
     margin-bottom: 150px;
+    max-width: 100vw;
 }
 
 .ui.form {
@@ -27,6 +32,11 @@ body {
     color: #fff !important;
     background-color: teal;
 }
+
+.ui.form.register {
+    width: 800px;
+}
+
 
 .ui.form .field>label{
     color: #fff !important;

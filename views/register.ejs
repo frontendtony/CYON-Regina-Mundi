@@ -1,0 +1,196 @@
+<% include ./partials/header %>
+<div class="login register">
+    <div class="ui raised segment">
+        <form class="ui form register" action="/register" method="POST">
+            <h2 class="form-title">Create Account</h2>
+            <h3 class="ui dividing header">Personal Information</h3>
+            <div class='three fields'>
+                <div class='field'>
+                    <label>First name</label>
+                    <input type="text" name="newUser[firstname]" placeholder="First name">
+                </div>
+                <div class='field'>
+                    <label>Middle name</label>
+                    <input type="text" name="newUser[middlename]" placeholder="Middle name">
+                </div>
+                <div class='field'>
+                    <label>Last name</label>
+                    <input type="text" name="newUser[lastname]" placeholder="Last name">
+                </div>
+            </div>
+            <div class="fields">
+                <div class='four wide field'>
+                    <label>Gender</label>
+                    <select class='ui fluid dropdown'>
+                        <option value=''>Select</option>
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                    </select>
+                </div>
+                <div class='four wide field'>
+                    <label>Marital Status</label>
+                    <select class='ui fluid dropdown'>
+                        <option value=''>Select</option>
+                        <option value='single'>Single</option>
+                        <option value='married'>Married</option>
+                        <option value='engaged'>Engaged</option>
+                        <option value='relationship'>In a relationship</option>
+                    </select>
+                </div>
+                
+                <div class='eight wide field'>
+                    <label>Date of birth</label>
+                    <div class='three fields'>
+                        <div class='field'>
+                            <select class='ui fluid search dropdown' name='newUser[date]'>
+                                <option value=''>Date</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div>
+                        <div class='field'>
+                            <select class='ui fluid search dropdown' name='newUser[month]'>
+                                <option value=''>Month</option>
+                                <option value='jan'>January</option>
+                                <option value='feb'>February</option>
+                                <option value='mar'>March</option>
+                                <option value="apr">April</option>
+                                <option value="may">May</option>
+                                <option value="jun">June</option>
+                                <option value="jul">July</option>
+                                <option value="aug">August</option>
+                                <option value="sep">September</option>
+                                <option value="oct">October</option>
+                                <option value="nov">November</option>
+                                <option value="dec">December</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <input type='text' maxlength='4' placeholder="Year" name='newUser[year]'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class='ui dividing header'>Contact</h3>
+            <div class='three fields'>
+                <div class='field'>
+                    <label>Email</label>
+                    <input type="email" placeholder='Email' name='newUser[email]'>
+                </div>
+                <div class='field'>
+                    <label>Phone1</label>
+                    <input type="text" placeholder='Phone Number' name='newUser[phone]'>
+                </div>
+                <div class='field'>
+                    <label>Phone2</label>
+                    <input type="text" placeholder='Second Phone' name='newUser[phone2]'>
+                </div>
+            </div>
+            <div class='field'>
+                <label>Residential Address</label>
+                <input type="text" placeholder='Lagos Address' name='newUser[address]'>
+            </div>
+            <div class='field'>
+                <label>Home Address</label>
+                <input type="text" placeholder='Village Address' name='newUser[address2]'>
+            </div>
+            <div class='three fields'>
+                <div class='field'>
+                    <label>State of Origin</label>
+                    <select class='ui fluid search dropdown' name='newUser[state]'>
+                        <option value=''>State</option>
+                        <option value='abia'>Abia</option>
+                        <option value='adamawa'>Adamawa</option>
+                        <option value='akwa-ibom'>Akwa-Ibom</option>
+                        <option value='anambra'>Anambra</option>
+                        <option value='bauchi'>Bauchi</option>
+                        <option value='bayelsa'>Bayelsa</option>
+                        <option value='benue'>Benue</option>
+                        <option value='borno'>Borno</option>
+                        <option value='cross-river'>Cross-River</option>
+                        <option value='delta'>Delta</option>
+                        <option value='ebonyi'>Ebonyi</option>
+                        <option value='edo'>Edo</option>
+                        <option value='ekiti'>Ekiti</option>
+                        <option value='enugu'>Enugu</option>
+                        <option value='gombe'>Gombe</option>
+                        <option value='imo'>Imo</option>
+                        <option value='jigawa'>Jigawa</option>
+                        <option value='kaduna'>Kaduna</option>
+                        <option value='kano'>Kano</option>
+                        <option value='katsina'>Katsina</option>
+                        <option value='kebbi'>Kebbi</option>
+                        <option value='kogi'>Kogi</option>
+                        <option value='kwara'>Kwara</option>
+                        <option value='lagos'>Lagos</option>
+                        <option value='nasarawa'>Nasarawa</option>
+                        <option value='niger'>Niger</option>
+                        <option value='ogun'>Ogun</option>
+                        <option value='ondo'>Ondo</option>
+                        <option value='osun'>Osun</option>
+                        <option value='oyo'>Oyo</option>
+                        <option value='plateau'>Plateau</option>
+                        <option value='rivers'>Rivers</option>
+                        <option value='sokoto'>Sokoto</option>
+                        <option value='taraba'>Taraba</option>
+                        <option value='yobe'>Yobe</option>
+                        <option value='zamfara'>Zamfara</option>
+                    </select>
+                </div>
+                <div class='field'>
+                    <label>City/Town</label>
+                    <input type="text" placeholder='City/Town' name='newUser[city]'>
+                </div>
+                <div class='field'>
+                    <label>L.G.A</label>
+                    <input type="text" placeholder='Local Government of Origin' name='newUser[lga]'>
+                </div>
+                
+            </div>
+            <h3 class='ui dividing header'>Create Password</h3>
+            <div class='two fields'>
+                <div class='field'>
+                    <label>Password</label>
+                    <input type="password" placeholder='Password' name='newUser[password]'>
+                </div>
+                <div class='field'>
+                    <label>Re-type password</label>
+                    <input type="password" placeholder='Re-type password'>
+                </div>
+            </div>
+            <input class="ui button login" type="submit" value="Register">
+        </form>
+    </div>
+</div>
+
+
+<% include ./partials/footer %>

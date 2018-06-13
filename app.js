@@ -23,6 +23,10 @@ app.get('/login', function(req, res) {
     res.render('login');
 })
 
+app.get('/register', function(req, res) {
+    res.render('register');
+})
+
 
 
 // mongoose.connect("mongodb://localhost/cyon_v1");
