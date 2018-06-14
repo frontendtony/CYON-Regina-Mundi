@@ -16,15 +16,15 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 app.get('/', function(req, res) {
-    res.render('landing');
+    res.render('landing', {title: 'CYON Regina-Mundi'});
 })
 
 app.get('/login', function(req, res) {
-    res.render('login');
+    res.render('login', {title: 'Login'});
 })
 
 app.get('/register', function(req, res) {
-    res.render('register');
+    res.render('register', {title: 'Sign Up'});
 })
 
 

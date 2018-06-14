@@ -1,27 +1,28 @@
 <% include ./partials/header %>
+
 <div class="login register">
     <div class="ui raised segment">
-        <form class="ui form register" action="/register" method="POST">
+        <form id="signUpForm" class="ui form register" action="/register" method="POST">
             <h2 class="form-title">Create Account</h2>
             <h3 class="ui dividing header">Personal Information</h3>
             <div class='three fields'>
                 <div class='field'>
                     <label>First name</label>
-                    <input type="text" name="newUser[firstname]" placeholder="First name">
+                    <input type="text" id='firstname' name="newUser[firstname]" placeholder="First name" />
                 </div>
                 <div class='field'>
                     <label>Middle name</label>
-                    <input type="text" name="newUser[middlename]" placeholder="Middle name">
+                    <input type="text" id='middlename' name="newUser[middlename]" placeholder="Middle name" />
                 </div>
                 <div class='field'>
                     <label>Last name</label>
-                    <input type="text" name="newUser[lastname]" placeholder="Last name">
+                    <input type="text" id='lastname' name="newUser[lastname]" placeholder="Last name" />
                 </div>
             </div>
             <div class="fields">
                 <div class='four wide field'>
                     <label>Gender</label>
-                    <select class='ui fluid dropdown'>
+                    <select class='ui fluid dropdown' id='gender' name='newUser[gender]' />
                         <option value=''>Select</option>
                         <option value='male'>Male</option>
                         <option value='female'>Female</option>
@@ -29,12 +30,10 @@
                 </div>
                 <div class='four wide field'>
                     <label>Marital Status</label>
-                    <select class='ui fluid dropdown'>
+                    <select class='ui fluid dropdown' id='relationshipStatus' name='newUser[relationshipStatus]' >
                         <option value=''>Select</option>
                         <option value='single'>Single</option>
                         <option value='married'>Married</option>
-                        <option value='engaged'>Engaged</option>
-                        <option value='relationship'>In a relationship</option>
                     </select>
                 </div>
                 
@@ -42,7 +41,7 @@
                     <label>Date of birth</label>
                     <div class='three fields'>
                         <div class='field'>
-                            <select class='ui fluid search dropdown' name='newUser[date]'>
+                            <select class='ui fluid search dropdown' id='date' name='newUser[date]' />
                                 <option value=''>Date</option>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
@@ -78,24 +77,24 @@
                             </select>
                         </div>
                         <div class='field'>
-                            <select class='ui fluid search dropdown' name='newUser[month]'>
+                            <select class='ui fluid search dropdown' id='month' name='newUser[month]' />
                                 <option value=''>Month</option>
-                                <option value='jan'>January</option>
-                                <option value='feb'>February</option>
-                                <option value='mar'>March</option>
-                                <option value="apr">April</option>
-                                <option value="may">May</option>
-                                <option value="jun">June</option>
-                                <option value="jul">July</option>
-                                <option value="aug">August</option>
-                                <option value="sep">September</option>
-                                <option value="oct">October</option>
-                                <option value="nov">November</option>
-                                <option value="dec">December</option>
+                                <option value='01'>January</option>
+                                <option value='02'>February</option>
+                                <option value='03'>March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
                             </select>
                         </div>
                         <div class="field">
-                            <input type='text' maxlength='4' placeholder="Year" name='newUser[year]'>
+                            <input type='text' maxlength='4' placeholder="Year" id='year' name='newUser[year]'>
                         </div>
                     </div>
                 </div>
@@ -104,29 +103,29 @@
             <div class='three fields'>
                 <div class='field'>
                     <label>Email</label>
-                    <input type="email" placeholder='Email' name='newUser[email]'>
+                    <input type="email" placeholder='Email' id='email' name='newUser[email]' />
                 </div>
                 <div class='field'>
                     <label>Phone1</label>
-                    <input type="text" placeholder='Phone Number' name='newUser[phone]'>
+                    <input type="text" placeholder='Phone Number' id='phone' name='newUser[phone]' />
                 </div>
                 <div class='field'>
                     <label>Phone2</label>
-                    <input type="text" placeholder='Second Phone' name='newUser[phone2]'>
+                    <input type="text" placeholder='Second Phone' id='phone2' name='newUser[phone2]'>
                 </div>
             </div>
             <div class='field'>
                 <label>Residential Address</label>
-                <input type="text" placeholder='Lagos Address' name='newUser[address]'>
+                <input type="text" placeholder='Lagos Address' id='address' name='newUser[address]' />
             </div>
             <div class='field'>
                 <label>Home Address</label>
-                <input type="text" placeholder='Village Address' name='newUser[address2]'>
+                <input type="text" placeholder='Village Address' id='address2' name='newUser[address2]'>
             </div>
             <div class='three fields'>
                 <div class='field'>
                     <label>State of Origin</label>
-                    <select class='ui fluid search dropdown' name='newUser[state]'>
+                    <select class='ui fluid search dropdown' id='state' name='newUser[state]' />
                         <option value=''>State</option>
                         <option value='abia'>Abia</option>
                         <option value='adamawa'>Adamawa</option>
@@ -168,11 +167,11 @@
                 </div>
                 <div class='field'>
                     <label>City/Town</label>
-                    <input type="text" placeholder='City/Town' name='newUser[city]'>
+                    <input type="text" placeholder='City/Town' id='city' name='newUser[city]'>
                 </div>
                 <div class='field'>
                     <label>L.G.A</label>
-                    <input type="text" placeholder='Local Government of Origin' name='newUser[lga]'>
+                    <input type="text" placeholder='Local Government of Origin' id='lga' name='newUser[localGovernmentOfOrigin]'>
                 </div>
                 
             </div>
@@ -180,17 +179,19 @@
             <div class='two fields'>
                 <div class='field'>
                     <label>Password</label>
-                    <input type="password" placeholder='Password' name='newUser[password]'>
+                    <input type="password" placeholder='Password' id='password' name='newUser[password]' />
                 </div>
                 <div class='field'>
                     <label>Re-type password</label>
-                    <input type="password" placeholder='Re-type password'>
+                    <input type="password" placeholder='Re-type password' id='confirmPassword' />
                 </div>
             </div>
             <input class="ui button login" type="submit" value="Register">
+            <div class="ui error message"></div>
         </form>
     </div>
 </div>
 
+<script src='js/register.js'></script>
 
 <% include ./partials/footer %>
