@@ -1,11 +1,14 @@
-let express = require('express');
-let app = express();
-let flash = require('connect-flash');
-let bodyParser = require('body-parser');
-let mongoose = require('mongoose');
-let passport = require('passport');
-let localStrategy = require('passport-local');
-let methodOverride = require('method-override');
+var express = require('express');
+var app = express();
+var flash = require('connect-flash');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var localStrategy = require('passport-local');
+var methodOverride = require('method-override');
+var User = require('./models/user');
+
+mongoose.connect("mongodb://localhost/cyon");
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +28,20 @@ app.get('/login', function(req, res) {
 
 app.get('/register', function(req, res) {
     res.render('register', {title: 'Sign Up'});
+})
+
+app.post('/register', function(req, res) {
+    var newUser = req.body.newUser;
+    newUser.dateOfBirth = new Date(req.body.year + '-' + req.body.month + '-' + req.body.date);
+    newUser.username = newUser.firstname + '.' + newUser.lastname;
+    User.create(newUser, function(err, createdUser){
+        if(err){
+            console.log('Could not create user')
+        } else {
+            console.log(createdUser)
+        }
+    })
+    res.redirect('/register');
 })
 
 
