@@ -52,7 +52,7 @@ body {
     margin-top: 20px !important;
 }
 
-.header,
+#header,
 .footer {
     background-color: teal !important;
 }
