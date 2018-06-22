@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <% if(!title){ %>
+        <% var title = 'CYON Regina-Mundi'; %>
+    <% } %>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class='navbar-nav mr-auto'>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home<span class="sr-only"></span></a>
+                        <a class="nav-link" href="/">Home<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About<span class="sr-only"></span></a>
@@ -47,14 +50,34 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Sign Up</a>
-                    </li>
-
+                    <% if(!currentUser){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Sign Up</a>
+                        </li>
+                    <% } else { %>
+                        <li class='nav-item'>
+                            <span class="navbar-text">Signed in as: <%= currentUser.email %></span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
     </nav>
+    <% if(error && error.length > 0){ %>
+        <div class="ui negative message container">
+          <i class="close icon"></i>
+            <%= error %>
+        </div>
+    <% } %>
+    <% if(success && success.length > 0){ %>
+        <div class="ui positive message container">
+          <i class="close icon"></i>
+            <%= success %>
+        </div>
+    <% } %>
