@@ -7,12 +7,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var methodOverride = require('method-override');
 var User = require('./models/user');
+var seedDb = require('./models/seed');
 
 var indexRoute = require('./routes/index');
 var userRoute = require('./routes/user');
 
-mongoose.connect("mongodb://localhost/cyon");
+mongoose.connect("mongodb://localhost/cyon_test");
 
+// seedDb();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
