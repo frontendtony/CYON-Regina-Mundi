@@ -1,16 +1,11 @@
-/*!
- * Start Bootstrap - Small Business (https://startbootstrap.com/template-overviews/small-business)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-small-business/blob/master/LICENSE)
- */
-
 body {
     padding-top: 77px !important;
+    background: #f6f8f9; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-
-/*.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top.header {*/
-/*    margin-bottom: 25px !important;*/
-/*}*/
 
 .login.register {
     display: flex;
@@ -79,4 +74,8 @@ body {
     body {
         padding-top: 56px;
     }
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
