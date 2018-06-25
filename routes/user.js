@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var passport = require('passport');
+var moment = require('moment');
 var middleware = require('../middleware');
 
 
@@ -22,20 +23,31 @@ router.post('/register', function(req, res) {
             }
             return res.render('register', { title: 'Sign Up', newUser: newUser });
         }
-        console.log(user);
         passport.authenticate('local')(req, res, function() {
-            console.log('Authenticating....');
             res.redirect('/');
         });
     });
 })
 
-router.get('/members', middleware.isLoggedIn, function(req, res) {
-    res.render('members');
+router.get('/members', /*middleware.isLoggedIn,*/ function(req, res){
+    User.find(function(err, members){
+        if(err){
+            console.log(err);
+            return res.redirect('/')
+        }
+        res.render('members', { members: members });
+    })
 })
 
-router.get('/member', function(req, res) {
-    res.render('member');
+router.get('/member/:id', function(req, res) {
+    User.findById(req.params.id, function (err, member){
+        if(err){
+            console.log(err);
+            return res.redirect('/members')
+        }
+        member.birthday = moment(member.dateOfBirth).format("MMMM Do");
+        res.render('member', {member: member});
+    })
 })
 
 module.exports = router;

@@ -1,43 +1,43 @@
 <% include ./partials/header %>
 <link rel="stylesheet" type="text/css" href='/stylesheets/member.css'>
 
-<img class="ui centered rounded medium image" src="http://via.placeholder.com/200x200">
+<img class="ui centered rounded large bodered image" src="<%= member.image %>" alt="<%= member.firstname +' '+ member.lastname %>">
 <div class='ui raised piled very padded segment text container'>
     <div class="ui big list">
         <div class="item">
             <div class="ui two column stackable grid">
                 <div class="column header">Name:</div>
-                <div class="column">Gozie</div>
+                <div class="column capitalize"><%= member.firstname +" "+ member.lastname %></div>
             </div>
         </div>
         <div class="item">
             <div class="ui two column stackable grid">
                 <div class="column header">Position:</div>
-                <div class="column">Member</div>
+                <div class="column capitalize"><%= member.currentPosition %></div>
             </div>
         </div>
         <div class="item">
             <div class="ui two column stackable grid">
                 <div class="column header">Phone:</div>
-                <div class="column">07081627814</div>
+                <div class="column"><%= member.phone %></div>
             </div>
         </div>
         <div class="item">
             <div class="ui two column stackable grid">
                 <div class="column header">Email:</div>
-                <div class="column">tonero91@gmail.comyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</div>
+                <div class="column"><%= member.email %></div>
             </div>
         </div>
         <div class="item">
             <div class="ui two column stackable grid">
                 <div class="column header">Relationship Status:</div>
-                <div class="column">Single</div>
+                <div class="column capitalize"><%= member.relationshipStatus %></div>
             </div>
         </div>
         <div class="item">
             <div class="ui two column stackable grid">
                 <div class="column header">Birthday:</div>
-                <div class="column">24-September</div>
+                <div class="column"><%= member.birthday %></div>
             </div>
         </div>
     </div>
