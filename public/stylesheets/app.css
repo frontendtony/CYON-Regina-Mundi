@@ -76,6 +76,17 @@ body {
     }
 }
 
+@media only screen and (max-width: 767px) {
+    .ui.centered.cards>.card {
+        display: block!important;
+        width: 100% !important;
+    }
+}
+
+.ui.centered.cards>.card {
+    width: 350px;
+}
+
 .capitalize {
   text-transform: capitalize;
 }
