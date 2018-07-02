@@ -39,7 +39,7 @@ router.get('/members', /*middleware.isLoggedIn,*/ function(req, res){
     })
 })
 
-router.get('/member/:id', function(req, res) {
+router.get('/members/:id', function(req, res) {
     User.findById(req.params.id, function (err, member){
         if(err){
             console.log(err);
