@@ -1,3 +1,4 @@
+var User = require("../models/user")
 var middlewareObject = {};
 
 middlewareObject.isLoggedIn = function(req, res, next) {
@@ -7,5 +8,21 @@ middlewareObject.isLoggedIn = function(req, res, next) {
         res.render('login', { source: req.path, title: 'Login' });
     }
 }
+
+middlewareObject.verifyAccountOwnership = function(req, res, next) {
+    User.findById(req.params.id, function(err, user) {
+        if (err) {
+            res.redirect('back');
+        } else {
+            //check if user owns the campground
+            if (user._id.equals(req.user._id)) {
+                next();
+            } else {
+                req.flash('error', 'You do not have permission to do that');
+                return res.redirect('/members/' + req.params.id);
+            }
+        }
+    })
+};
 
 module.exports = middlewareObject;
