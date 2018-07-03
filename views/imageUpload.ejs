@@ -1,0 +1,18 @@
+<% include ./partials/header %>
+
+<div class="login register">
+    <div class="ui raised segment">
+        <form id="uploadImageForm" class="ui form register" action='<%= "/uploadImage/"+userId %>' method="POST" enctype="multipart/form-data">
+            <h2 class="form-title">Upload Image</h2>
+            <div class='field'>
+                <input type="file" id='image' name="image" />
+            </div>
+            <input class="ui button login" type="submit" value="Upload">
+            <div class="ui error message"></div>
+        </form>
+    </div>
+</div>
+
+<script src='js/register.js'></script>
+
+<% include ./partials/footer %>
