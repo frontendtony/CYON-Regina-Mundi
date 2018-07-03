@@ -49,9 +49,13 @@ body {
 
 #header,
 .footer {
+    font-size: 18px;
     background-color: teal !important;
 }
 
+.navbar-brand {
+    font-size: 1.6rem;
+}
 .card.text-white {
     background-color: darkorange !important;
 }

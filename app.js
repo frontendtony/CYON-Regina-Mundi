@@ -8,7 +8,6 @@ var LocalStrategy = require('passport-local');
 var methodOverride = require('method-override');
 var User = require('./models/user');
 var seedDb = require('./models/seed');
-
 var indexRoute = require('./routes/index');
 var userRoute = require('./routes/user');
 
