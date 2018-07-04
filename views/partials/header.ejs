@@ -66,7 +66,7 @@
                             <span class="navbar-text capitalize"><%= currentUser.firstname %></span>
                         </li>
                         <li class='nav-item'>
-                            <img class='ui spaced circular avatar image' src='<%= currentUser.image %>'>
+                            <img class='ui spaced circular avatar image' src='<%= currentUser.image || "https://cdn2.vectorstock.com/i/1000x1000/23/81/default-avatar-profile-icon-vector-18942381.jpg" %>'>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>

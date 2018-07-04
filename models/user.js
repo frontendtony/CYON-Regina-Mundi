@@ -9,6 +9,7 @@ var UserSchema = new mongoose.Schema({
 	lastname: { type:String, lowercase: true },
 	middlename: { type:String, lowercase: true },
 	image: { type:String},
+	imageId: String,
 	gender: { type:String, lowercase: true },
 	relationshipStatus: { type:String, default: 'single'},
 	dateOfBirth: Date,
