@@ -4,6 +4,7 @@ var User = require('../models/user');
 var passport = require('passport');
 var moment = require('moment');
 var middleware = require('../middleware');
+var cloudinary = require('cloudinary');
 var multer = require('multer');
 var storage = multer.diskStorage({
   filename: function(req, file, callback) {
@@ -20,7 +21,7 @@ var imageFilter = function (req, file, cb) {
 var upload = multer({ storage: storage, fileFilter: imageFilter})
 
 
-var cloudinary = require('cloudinary');
+
 cloudinary.config({ 
   cloud_name: 'tonerolima', 
   api_key: '495368473539414', 
@@ -82,19 +83,19 @@ router.get('/uploadImage/:id', function(req, res) {
 
 
 router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single('image'), function(req, res) {
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        // add cloudinary url for the image to the campground object under image property
-        var image = result.secure_url;
-        console.log(req.user._id);
-        User.findByIdAndUpdate(req.user._id, {image: image}, function(err, user) {
-            if (err) {
-              req.flash('error', err.message);
-              return res.redirect('back');
-            }
-            console.log(user);
-            res.redirect('/members/' + user._id);
-        });
-    });
+    User.findById(req.user._id, async function(err, user){
+        if(err){
+            req.flash('error', err.message);
+            return res.redirect('back');
+        }
+        console.log(user);
+        var result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/", public_id: user.firstname+"_"+user.lastname, overwrite: true});
+        user.image = result.secure_url;
+        user.imageId = result.public_id;
+        user.save();
+        console.log(user);
+        res.redirect('/members/' + user._id);
+    })
 })
 
 
