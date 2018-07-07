@@ -69,8 +69,9 @@ router.get('/members/:id', function(req, res) {
     User.findById(req.params.id, function (err, member){
         if(err){
             console.log(err);
-            return res.redirect('/members')
+            return res.redirect('/members');
         }
+        member.croppedImage = cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true});
         member.birthday = moment(member.dateOfBirth).format("MMMM Do");
         res.render('member', {member: member});
     })
@@ -88,12 +89,10 @@ router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single
             req.flash('error', err.message);
             return res.redirect('back');
         }
-        console.log(user);
         var result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/", public_id: user.firstname+"_"+user.lastname, overwrite: true});
         user.image = result.secure_url;
         user.imageId = result.public_id;
         user.save();
-        console.log(user);
         res.redirect('/members/' + user._id);
     })
 })
