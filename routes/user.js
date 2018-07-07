@@ -60,6 +60,11 @@ router.get('/members', /*middleware.isLoggedIn,*/ function(req, res){
             console.log(err);
             return res.redirect('/')
         }
+        members.map(member => {
+            var newObj = member;
+            newObj.image = member.imageId? cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true}): member.image;
+            return newObj;
+        })
         res.render('members', { members: members });
     })
 })
@@ -71,7 +76,7 @@ router.get('/members/:id', function(req, res) {
             console.log(err);
             return res.redirect('/members');
         }
-        member.croppedImage = cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true});
+        member.image = cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true});
         member.birthday = moment(member.dateOfBirth).format("MMMM Do");
         res.render('member', {member: member});
     })
