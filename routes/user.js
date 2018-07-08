@@ -1,24 +1,24 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
-var passport = require('passport');
-var moment = require('moment');
-var middleware = require('../middleware');
-var cloudinary = require('cloudinary');
-var multer = require('multer');
-var storage = multer.diskStorage({
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
+const passport = require('passport');
+const moment = require('moment');
+const middleware = require('../middleware');
+const cloudinary = require('cloudinary');
+const multer = require('multer');
+const storage = multer.diskStorage({
   filename: function(req, file, callback) {
     callback(null, Date.now() + file.originalname);
   }
 });
-var imageFilter = function (req, file, cb) {
+const imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
         return cb(new Error('Only image files are allowed!'), false);
     }
     cb(null, true);
 };
-var upload = multer({ storage: storage, fileFilter: imageFilter})
+const upload = multer({ storage: storage, fileFilter: imageFilter})
 
 
 
@@ -35,7 +35,7 @@ router.get('/register', function(req, res) {
 
 
 router.post('/register', function(req, res) {
-    var newUser = req.body.newUser;
+    let newUser = req.body.newUser;
     newUser.dateOfBirth = new Date(req.body.year + '-' + req.body.month + '-' + req.body.date);
     newUser.email = req.body.username;
     newUser.username = req.body.username;
@@ -61,7 +61,7 @@ router.get('/members', /*middleware.isLoggedIn,*/ function(req, res){
             return res.redirect('/')
         }
         members.map(member => {
-            var newObj = member;
+            let newObj = member;
             newObj.image = member.imageId? cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true}): member.image;
             return newObj;
         })
@@ -94,7 +94,7 @@ router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single
             req.flash('error', err.message);
             return res.redirect('back');
         }
-        var result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/", public_id: user.firstname+"_"+user.lastname, overwrite: true});
+        let result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/", public_id: user.firstname+"_"+user.lastname, overwrite: true});
         user.image = result.secure_url;
         user.imageId = result.public_id;
         user.save();

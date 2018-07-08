@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var middleware = require('../middleware');
-var passport = require('passport');
+const express = require('express');
+const router = express.Router();
+const middleware = require('../middleware');
+const passport = require('passport');
 
 router.get('/', middleware.isLoggedIn, function(req, res) {
     res.render('landing', {title: 'CYON Regina-Mundi'});
