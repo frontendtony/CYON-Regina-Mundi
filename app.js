@@ -13,7 +13,7 @@ const seedDb = require('./models/seed');
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 
-mongoose.connect("mongodb://localhost/cyon_test");
+mongoose.connect(process.env.CYONDB);
 
 // seedDb();
 

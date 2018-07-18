@@ -54,7 +54,7 @@ router.post('/register', function(req, res) {
 })
 
 
-router.get('/members', /*middleware.isLoggedIn,*/ function(req, res){
+router.get('/members', middleware.isLoggedIn, function(req, res){
     User.find(function(err, members){
         if(err){
             console.log(err);
@@ -70,7 +70,7 @@ router.get('/members', /*middleware.isLoggedIn,*/ function(req, res){
 })
 
 
-router.get('/members/:id', function(req, res) {
+router.get('/members/:id', middleware.isLoggedIn, function(req, res) {
     User.findById(req.params.id, function (err, member){
         if(err){
             console.log(err);
@@ -83,7 +83,7 @@ router.get('/members/:id', function(req, res) {
 })
 
 
-router.get('/uploadImage/:id', function(req, res) {
+router.get('/uploadImage/:id', middleware.isLoggedIn, function(req, res) {
     res.render('imageUpload', {userId: req.params.id});
 })
 
