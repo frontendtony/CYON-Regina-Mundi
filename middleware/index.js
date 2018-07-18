@@ -1,5 +1,5 @@
-var User = require("../models/user")
-var middlewareObject = {};
+const User = require("../models/user")
+const middlewareObject = {};
 
 middlewareObject.isLoggedIn = function(req, res, next) {
     if (req.isAuthenticated()) {

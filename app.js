@@ -1,17 +1,17 @@
-var express = require('express');
-var app = express();
-var flash = require('connect-flash');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var methodOverride = require('method-override');
-var User = require('./models/user');
-var seedDb = require('./models/seed');
-var indexRoute = require('./routes/index');
-var userRoute = require('./routes/user');
+const express = require('express');
+const app = express();
+const flash = require('connect-flash');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const methodOverride = require('method-override');
+const User = require('./models/user');
+const seedDb = require('./models/seed');
+const indexRoute = require('./routes/index');
+const userRoute = require('./routes/user');
 
 mongoose.connect("mongodb://localhost/cyon_test");
 
@@ -33,15 +33,6 @@ app.use(session({
     store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 
-// app.use(express.session({
-//     secret: 'a4f8071f-c873-4447-8ee2',
-//     cookie: { maxAge: 2628000000 },
-//     store: new (require('express-sessions'))({
-//         storage: 'mongodb',
-//         collection: 'sessions', // optional
-//         expire: 86400 // optional
-//     })
-// }));
 
 app.use(passport.initialize());
 app.use(passport.session());
