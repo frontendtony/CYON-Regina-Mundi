@@ -43,15 +43,14 @@
                         <a class="nav-link" href="/">Home<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/members">Members</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/committees">Committees</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/committees">Birthdays</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <% if(!currentUser){ %>
@@ -63,7 +62,7 @@
                         </li>
                     <% } else { %>
                         <li class='nav-item'>
-                            <span class="navbar-text capitalize"><%= currentUser.firstname %></span>
+                            <a class="navbar-text capitalize" href="/members/<%= currentUser._id%>"><%= currentUser.firstname %></a>
                         </li>
                         <li class='nav-item'>
                             <img class='ui spaced circular avatar image' src='<%= currentUser.image || "https://cdn2.vectorstock.com/i/1000x1000/23/81/default-avatar-profile-icon-vector-18942381.jpg" %>'>
@@ -71,7 +70,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                              <a class="dropdown-item" href="/uploadImage/<%= currentUser._id%>">Edit Profile Picture</a>
+                              <a class="dropdown-item" href="/members/<%= currentUser._id%>">View Profile</a>
+                              <a class="dropdown-item" href="/members/<%= currentUser._id%>/edit">Edit Profile</a>
+                              <a class="dropdown-item" href="/uploadImage/<%= currentUser._id%>">Upload Profile Picture</a>
                               <a class="dropdown-item" href="/logout">Logout</a>
                             </div>
                         </li>
