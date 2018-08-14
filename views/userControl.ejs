@@ -1,0 +1,59 @@
+<% include ./partials/header %>
+<link type="text/css" href="/stylesheets/userControl.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href='/stylesheets/member.css'>
+
+<section class='ui container'>
+  <div class="ui top attached tabular menu">
+    <a class="active item" data-tab='first'>Select Executives</a>
+    <a class="item" data-tab='second'>Committees</a>
+    <a class="item" data-tab='third'>Programs</a>
+  </div>
+  <div class="ui bottom attached active tab segment" data-tab='first'>
+    <form class='ui form'>
+      <div class="ui big list">
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">President:</div>
+            <div class="column capitalize">
+              <select class='ui dropdown'>
+                <option value=''>Chigozie</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Vice President:</div>
+            <div class="column capitalize">
+              <select class='ui dropdown'>
+                <option value=''>Chigozie</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Secretary:</div>
+            <div class="column capitalize">
+              <select class='ui dropdown'>
+                <option value=''>Chigozie</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </form>
+  </div>
+  <div class="ui bottom attached tab segment" data-tab='second'>
+    <p>This is the second paragraph</p>
+  </div>
+  <div class="ui bottom attached tab segment" data-tab='third'>
+    <p>This is the third paragraph</p>
+  </div>
+</section>
+
+
+<script src='/js/userControl.js'></script>

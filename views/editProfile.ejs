@@ -1,0 +1,155 @@
+<% include ./partials/header %>
+<link type="text/css" href="/stylesheets/editProfile.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href='/stylesheets/member.css'>
+
+<div class="ui container segment">
+    <form class='ui small form' action="/members/<%= currentUser._id %>/edit?_method=PUT" method="POST">
+      <div class="ui medium list">
+        <div class="item">
+          <h3 class="ui medium dividing header">Personal Information</h3>
+          <div class="ui two column stackable grid">
+            <div class="column header">First name:</div>
+            <div class="column capitalize ui transparent input">
+              <input class='capitalize' type="text" id='firstname' name="user[firstname]" placeholder="First name" value="<%= member.firstname %>" disabled/>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Middle name:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="text" id='middlename' name="user[middlename]" placeholder="Middle name" value="<%= member.middlename %>" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Last name:</div>
+            <div class="column capitalize ui transparent input">
+              <input class='capitalize' type="text" id='lastname' name="user[lastname]" placeholder="Last name" value="<%= member.lastname %>" disabled/>
+            </div>
+          </div>
+        </div>
+        
+       <div class="item">
+          <h3 class="ui medium dividing header">Contact</h3>
+          <div class="ui two column stackable grid">
+            <div class="column header">Email:</div>
+            <div class="column capitalize ui transparent input">
+              <input type="email" placeholder='Email' id='email' name='user[email]' value="<%= member.email %>" disabled/>
+            </div>
+          </div>
+        </div>
+        
+       <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Phone1:</div>
+            <div class="column capitalize">
+              <input type="text" placeholder='Phone Number' id='phone' name='user[phone]' value="<%= member.phone %>" />
+            </div>
+          </div>
+        </div>
+        
+       <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Phone2:</div>
+            <div class="column capitalize">
+              <input type="text" placeholder='Second Phone' id='phone2' name='user[phone2]' value="<%= member.phone2 %>" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Residential Address:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="text" placeholder='Lagos Address' id='address' name='user[address]' value="<%= member.address %>" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Home Address:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="text" placeholder='Village Address' id='address2' name='user[address2]' value="<%= member.address2 %>" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">State of Origin:</div>
+            <div class="column capitalize">
+              <select class='ui fluid search dropdown' id='state' name='user[state]' />
+                <option value=''>State</option>
+                <option value='abia'>Abia</option>
+                <option value='adamawa'>Adamawa</option>
+                <option value='akwa-ibom'>Akwa-Ibom</option>
+                <option value='anambra'>Anambra</option>
+                <option value='bauchi'>Bauchi</option>
+                <option value='bayelsa'>Bayelsa</option>
+                <option value='benue'>Benue</option>
+                <option value='borno'>Borno</option>
+                <option value='cross-river'>Cross-River</option>
+                <option value='delta'>Delta</option>
+                <option value='ebonyi'>Ebonyi</option>
+                <option value='edo'>Edo</option>
+                <option value='ekiti'>Ekiti</option>
+                <option value='enugu'>Enugu</option>
+                <option value='gombe'>Gombe</option>
+                <option value='imo'>Imo</option>
+                <option value='jigawa'>Jigawa</option>
+                <option value='kaduna'>Kaduna</option>
+                <option value='kano'>Kano</option>
+                <option value='katsina'>Katsina</option>
+                <option value='kebbi'>Kebbi</option>
+                <option value='kogi'>Kogi</option>
+                <option value='kwara'>Kwara</option>
+                <option value='lagos'>Lagos</option>
+                <option value='nasarawa'>Nasarawa</option>
+                <option value='niger'>Niger</option>
+                <option value='ogun'>Ogun</option>
+                <option value='ondo'>Ondo</option>
+                <option value='osun'>Osun</option>
+                <option value='oyo'>Oyo</option>
+                <option value='plateau'>Plateau</option>
+                <option value='rivers'>Rivers</option>
+                <option value='sokoto'>Sokoto</option>
+                <option value='taraba'>Taraba</option>
+                <option value='yobe'>Yobe</option>
+                <option value='zamfara'>Zamfara</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">City/Town:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="text" placeholder='City/Town' id='city' name='user[city]' value="<%= member.city %>" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">L.G.A:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="text" placeholder='Local Government of Origin' id='lga' name='user[localGovernmentOfOrigin]' value="<%= member.localGovernmentOfOrigin %>" />
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <input class="ui button login" type="submit" value="Update Details">
+    </form>
+</div>
+
+<script src='/js/editProfile.js'></script>
+
+<% include ./partials/footer %>

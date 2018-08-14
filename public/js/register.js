@@ -154,3 +154,7 @@ $('.ui.form.register')
     }
   })
 ;
+
+$('select.dropdown')
+  .dropdown()
+;

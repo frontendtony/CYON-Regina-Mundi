@@ -32,4 +32,11 @@ router.get('/logout', function(req, res) {
     res.redirect('/login');
 })
 
+
+router.get('/userControl', (req, res) => {
+    res.render('userControl');
+})
+
+
+
 module.exports = router;
