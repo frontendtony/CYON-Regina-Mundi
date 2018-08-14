@@ -18,7 +18,7 @@ middlewareObject.verifyAccountOwnership = function(req, res, next) {
             if (user._id.equals(req.user._id)) {
                 next();
             } else {
-                req.flash('error', 'You do not have permission to do that');
+                req.flash('error', 'Access Denied!');
                 return res.redirect('/members/' + req.params.id);
             }
         }
