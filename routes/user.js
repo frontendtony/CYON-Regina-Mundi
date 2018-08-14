@@ -29,17 +29,17 @@ cloudinary.config({
 });
 
 
-router.get('/register', function(req, res) {
+router.get('/register', (req, res) => {
     res.render('register', { title: 'Sign Up' });
 });
 
 
-router.post('/register', function(req, res) {
+router.post('/register', (req, res) => {
     let newUser = req.body.newUser;
     newUser.dateOfBirth = new Date(req.body.year + '-' + req.body.month + '-' + req.body.date);
     newUser.email = req.body.username;
     newUser.username = req.body.username;
-    User.register(newUser, req.body.password, function(err, user) {
+    User.register(newUser, req.body.password, (err, user) => {
         if (err) {
             console.log(err);
             if (err.name === 'UserExistsError') {
@@ -47,14 +47,14 @@ router.post('/register', function(req, res) {
             }
             return res.render('register', { title: 'Sign Up', newUser: newUser });
         }
-        passport.authenticate('local')(req, res, function() {
+        passport.authenticate('local')(req, res, () => {
             res.redirect('/uploadImage/'+user._id);
         });
     });
 })
 
 
-router.get('/members', middleware.isLoggedIn, function(req, res){
+router.get('/members', middleware.isLoggedIn, (req, res) =>{
     User.find(function(err, members){
         if(err){
             console.log(err);
@@ -70,7 +70,7 @@ router.get('/members', middleware.isLoggedIn, function(req, res){
 })
 
 
-router.get('/members/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/members/:id', middleware.isLoggedIn, (req, res) => {
     User.findById(req.params.id, function (err, member){
         if(err){
             console.log(err);
@@ -83,13 +83,29 @@ router.get('/members/:id', middleware.isLoggedIn, function(req, res) {
 })
 
 
-router.get('/uploadImage/:id', middleware.isLoggedIn, function(req, res) {
+router.get('/members/:id/edit', middleware.isLoggedIn, middleware.verifyAccountOwnership, (req, res) => {
+    User.findById(req.params.id, (err, member) =>{
+        if(err) return res.redirect('/members');
+        res.render('editProfile', {member: member});
+    })
+})
+
+
+router.put('/members/:id/edit', middleware.isLoggedIn, middleware.verifyAccountOwnership, (req, res) => {
+    User.findByIdAndUpdate(req.params.id, req.body.user, (err, user) => {
+        if(err) return res.redirect(`/members/${req.params.id}/edit`);
+        res.redirect(`/members/${req.params.id}`);
+    })
+})
+
+
+router.get('/uploadImage/:id', middleware.isLoggedIn, (req, res) => {
     res.render('imageUpload', {userId: req.params.id});
 })
 
 
-router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single('image'), function(req, res) {
-    User.findById(req.user._id, async function(err, user){
+router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single('image'), (req, res) => {
+    User.findById(req.user._id, async (err, user) =>{
         if(err){
             req.flash('error', err.message);
             return res.redirect('back');
