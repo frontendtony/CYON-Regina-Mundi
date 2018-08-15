@@ -84,43 +84,14 @@
             <div class="column header">State of Origin:</div>
             <div class="column capitalize">
               <select class='ui fluid search dropdown' id='state' name='user[state]' />
-                <option value=''>State</option>
-                <option value='abia'>Abia</option>
-                <option value='adamawa'>Adamawa</option>
-                <option value='akwa-ibom'>Akwa-Ibom</option>
-                <option value='anambra'>Anambra</option>
-                <option value='bauchi'>Bauchi</option>
-                <option value='bayelsa'>Bayelsa</option>
-                <option value='benue'>Benue</option>
-                <option value='borno'>Borno</option>
-                <option value='cross-river'>Cross-River</option>
-                <option value='delta'>Delta</option>
-                <option value='ebonyi'>Ebonyi</option>
-                <option value='edo'>Edo</option>
-                <option value='ekiti'>Ekiti</option>
-                <option value='enugu'>Enugu</option>
-                <option value='gombe'>Gombe</option>
-                <option value='imo'>Imo</option>
-                <option value='jigawa'>Jigawa</option>
-                <option value='kaduna'>Kaduna</option>
-                <option value='kano'>Kano</option>
-                <option value='katsina'>Katsina</option>
-                <option value='kebbi'>Kebbi</option>
-                <option value='kogi'>Kogi</option>
-                <option value='kwara'>Kwara</option>
-                <option value='lagos'>Lagos</option>
-                <option value='nasarawa'>Nasarawa</option>
-                <option value='niger'>Niger</option>
-                <option value='ogun'>Ogun</option>
-                <option value='ondo'>Ondo</option>
-                <option value='osun'>Osun</option>
-                <option value='oyo'>Oyo</option>
-                <option value='plateau'>Plateau</option>
-                <option value='rivers'>Rivers</option>
-                <option value='sokoto'>Sokoto</option>
-                <option value='taraba'>Taraba</option>
-                <option value='yobe'>Yobe</option>
-                <option value='zamfara'>Zamfara</option>
+                <% var states = ['abia','adamawa','akwa-ibom','anambra','bauchi','bayelsa','benue','borno','cross-river','delta','ebonyi','edo','ekiti','enugu','gombe','imo','jigawa','kaduna','kano','katsina','kebbi','kogi','kwara','lagos','nasarawa','niger','ogun','ondo','osun','oyo','plateau','rivers','sokoto','taraba','yobe','zamfara'] %>
+                <% for(let i=0; i<states.length; i++){ %>
+                  <% if(!(states[i] === member.state)){ %>
+                    <option value=<%= states[i] %>><%= states[i] %></option>
+                  <% } else { %>
+                    <option value=<%= states[i] %> selected><%= states[i] %></option>
+                  <% } %>
+                <% } %>
               </select>
             </div>
           </div>
@@ -146,10 +117,10 @@
         
       </div>
       
-      <input class="ui button login" type="submit" value="Update Details">
+      <input class="ui primary button" type="submit" value="Save">
+      <button class="ui button" type="button" value="Update Details"><a href="/members/<%=currentUser.id%>">Cancel</a></button>
     </form>
 </div>
 
 <script src='/js/editProfile.js'></script>
-
 <% include ./partials/footer %>
