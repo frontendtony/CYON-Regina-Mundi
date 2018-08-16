@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="fields">
-                <div class='four wide field'>
+                <div class='three wide field'>
                     <label>Gender</label>
                     <select class='ui fluid dropdown' id='gender' name='newUser[gender]' />
                         <option value=''>Select</option>
@@ -28,7 +28,7 @@
                         <option value='female'>Female</option>
                     </select>
                 </div>
-                <div class='four wide field'>
+                <div class='three wide field'>
                     <label>Marital Status</label>
                     <select class='ui fluid dropdown' id='relationshipStatus' name='newUser[relationshipStatus]' >
                         <option value=''>Select</option>
@@ -37,67 +37,16 @@
                     </select>
                 </div>
                 
-                <div class='eight wide field'>
+                <div class='four wide field'>
                     <label>Date of birth</label>
-                    <div class='three fields'>
-                        <div class='field'>
-                            <select class='ui fluid search dropdown' id='date' name='date' />
-                                <option value=''>Date</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
-                            </select>
-                        </div>
-                        <div class='field'>
-                            <select class='ui fluid search dropdown' id='month' name='month' />
-                                <option value=''>Month</option>
-                                <option value='01'>January</option>
-                                <option value='02'>February</option>
-                                <option value='03'>March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <input type='text' maxlength='4' placeholder="Year" id='year' name='year'>
-                        </div>
-                    </div>
+                    <input type="date" id='date' name='newUser[dateOfBirth]' />
                 </div>
+                
+                <div class='six wide field'>
+                    <label>Occupation</label>
+                    <input type="text" id='occupation' name='newUser[occupation]' />
+                </div>
+                
             </div>
             <h3 class='ui dividing header'>Contact</h3>
             <div class='three fields'>
@@ -126,43 +75,11 @@
                 <div class='field'>
                     <label>State of Origin</label>
                     <select class='ui fluid search dropdown' id='state' name='newUser[state]' />
-                        <option value=''>State</option>
-                        <option value='abia'>Abia</option>
-                        <option value='adamawa'>Adamawa</option>
-                        <option value='akwa-ibom'>Akwa-Ibom</option>
-                        <option value='anambra'>Anambra</option>
-                        <option value='bauchi'>Bauchi</option>
-                        <option value='bayelsa'>Bayelsa</option>
-                        <option value='benue'>Benue</option>
-                        <option value='borno'>Borno</option>
-                        <option value='cross-river'>Cross-River</option>
-                        <option value='delta'>Delta</option>
-                        <option value='ebonyi'>Ebonyi</option>
-                        <option value='edo'>Edo</option>
-                        <option value='ekiti'>Ekiti</option>
-                        <option value='enugu'>Enugu</option>
-                        <option value='gombe'>Gombe</option>
-                        <option value='imo'>Imo</option>
-                        <option value='jigawa'>Jigawa</option>
-                        <option value='kaduna'>Kaduna</option>
-                        <option value='kano'>Kano</option>
-                        <option value='katsina'>Katsina</option>
-                        <option value='kebbi'>Kebbi</option>
-                        <option value='kogi'>Kogi</option>
-                        <option value='kwara'>Kwara</option>
-                        <option value='lagos'>Lagos</option>
-                        <option value='nasarawa'>Nasarawa</option>
-                        <option value='niger'>Niger</option>
-                        <option value='ogun'>Ogun</option>
-                        <option value='ondo'>Ondo</option>
-                        <option value='osun'>Osun</option>
-                        <option value='oyo'>Oyo</option>
-                        <option value='plateau'>Plateau</option>
-                        <option value='rivers'>Rivers</option>
-                        <option value='sokoto'>Sokoto</option>
-                        <option value='taraba'>Taraba</option>
-                        <option value='yobe'>Yobe</option>
-                        <option value='zamfara'>Zamfara</option>
+                        <% var states = ['abia','adamawa','akwa-ibom','anambra','bauchi','bayelsa','benue','borno','cross-river','delta','ebonyi','edo','ekiti','enugu','gombe','imo','jigawa','kaduna','kano','katsina','kebbi','kogi','kwara','lagos','nasarawa','niger','ogun','ondo','osun','oyo','plateau','rivers','sokoto','taraba','yobe','zamfara'] %>
+                        <% for(let i=0; i<states.length; i++){ %>
+                          <option class='capitalize' value=<%= states[i] %> selected><%= states[i][0].toUpperCase() + states[i].substring(1); %></option>
+                        <% } %>
+                        <option value='' selected>State</option>
                     </select>
                 </div>
                 <div class='field'>

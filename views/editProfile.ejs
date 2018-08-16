@@ -33,6 +33,24 @@
           </div>
         </div>
         
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Date Of Birth:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="date" id='date' name="user[dateOfBirth]" value="<%= member.birthday %>"/>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item">
+          <div class="ui two column stackable grid">
+            <div class="column header">Occupation:</div>
+            <div class="column capitalize">
+              <input class='capitalize' type="text" id='occupation' name="user[occupation]" placeholder="Occupation" value="<%= member.occupation %>"/>
+            </div>
+          </div>
+        </div>
+        
        <div class="item">
           <h3 class="ui medium dividing header">Contact</h3>
           <div class="ui two column stackable grid">

@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
 	imageId: String,
 	gender: { type:String, lowercase: true },
 	relationshipStatus: { type:String, default: 'single'},
+	occupation: String,
 	dateOfBirth: Date,
 	phone: String,
 	phone2: String,

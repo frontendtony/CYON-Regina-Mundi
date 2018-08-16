@@ -36,12 +36,11 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
     let newUser = req.body.newUser;
-    newUser.dateOfBirth = new Date(req.body.year + '-' + req.body.month + '-' + req.body.date);
+    // newUser.dateOfBirth = new Date(req.body.year + '-' + req.body.month + '-' + req.body.date);
     newUser.email = req.body.username;
     newUser.username = req.body.username;
     User.register(newUser, req.body.password, (err, user) => {
         if (err) {
-            console.log(err);
             if (err.name === 'UserExistsError') {
                 req.flash('error', 'A user already exists with the same email');
             }
@@ -57,7 +56,6 @@ router.post('/register', (req, res) => {
 router.get('/members', middleware.isLoggedIn, (req, res) =>{
     User.find(function(err, members){
         if(err){
-            console.log(err);
             return res.redirect('/')
         }
         members.map(member => {
@@ -73,7 +71,6 @@ router.get('/members', middleware.isLoggedIn, (req, res) =>{
 router.get('/members/:id', middleware.isLoggedIn, (req, res) => {
     User.findById(req.params.id, function (err, member){
         if(err){
-            console.log(err);
             return res.redirect('/members');
         }
         member.image = cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true});
@@ -86,6 +83,8 @@ router.get('/members/:id', middleware.isLoggedIn, (req, res) => {
 router.get('/members/:id/edit', middleware.isLoggedIn, middleware.verifyAccountOwnership, (req, res) => {
     User.findById(req.params.id, (err, member) =>{
         if(err) return res.redirect('/members');
+        member.birthday = moment(member.dateOfBirth).format("YYYY-MM-DD");
+        console.log(member.birthday);
         res.render('editProfile', {member: member});
     })
 })
