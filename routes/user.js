@@ -30,13 +30,16 @@ cloudinary.config({
 
 
 router.get('/register', (req, res) => {
-    res.render('register', { title: 'Sign Up' });
+    if(req.user){
+        req.flash('error', 'You are already logged in');
+        return res.redirect('/');
+    }
+    res.render('register');
 });
 
 
 router.post('/register', (req, res) => {
     let newUser = req.body.newUser;
-    // newUser.dateOfBirth = new Date(req.body.year + '-' + req.body.month + '-' + req.body.date);
     newUser.email = req.body.username;
     newUser.username = req.body.username;
     User.register(newUser, req.body.password, (err, user) => {
@@ -54,7 +57,7 @@ router.post('/register', (req, res) => {
 
 
 router.get('/members', middleware.isLoggedIn, (req, res) =>{
-    User.find(function(err, members){
+    User.find((err, members) => {
         if(err){
             return res.redirect('/')
         }
@@ -69,7 +72,7 @@ router.get('/members', middleware.isLoggedIn, (req, res) =>{
 
 
 router.get('/members/:id', middleware.isLoggedIn, (req, res) => {
-    User.findById(req.params.id, function (err, member){
+    User.findById(req.params.id, (err, member) => {
         if(err){
             return res.redirect('/members');
         }
@@ -81,10 +84,9 @@ router.get('/members/:id', middleware.isLoggedIn, (req, res) => {
 
 
 router.get('/members/:id/edit', middleware.isLoggedIn, middleware.verifyAccountOwnership, (req, res) => {
-    User.findById(req.params.id, (err, member) =>{
+    User.findById(req.params.id, (err, member) => {
         if(err) return res.redirect('/members');
         member.birthday = moment(member.dateOfBirth).format("YYYY-MM-DD");
-        console.log(member.birthday);
         res.render('editProfile', {member: member});
     })
 })

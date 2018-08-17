@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema({
 	isAdmin: { type: Boolean, default: false},
 	isExecutive: { type: Boolean, default: false},
 	currentPosition: { type: String, lowercase:true, default: 'member'},
+	verified: { type: Boolean, default: false},
 	dateJoined: { type: Date, default: Date.now }
 });
 
