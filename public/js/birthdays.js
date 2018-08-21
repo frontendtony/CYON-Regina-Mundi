@@ -9,7 +9,7 @@ $('select').on('change', (event) => {
         $('tbody').empty();
         data.forEach((elem, index, array) => {
             $('tbody').append(
-                `<tr><td>${elem.firstname} ${elem.lastname}</td><td>${elem.gender}</td><td>${elem.dateOfBirth.substring(5,7)}</td><td>${elem.phone}</td><td>${elem.email}</td></tr>`
+                `<tr><td>${elem.firstname} ${elem.lastname}</td><td>${elem.gender}</td><td>${elem.dateOfBirth.substring(8,10)}</td><td>${elem.phone}</td><td>${elem.email}</td></tr>`
             )
         })
     })
