@@ -2,7 +2,7 @@
 
 $('select').on('change', (event) => {
     let month = $('select').val();
-    $.getJSON('https://portfolio-tonerolima.c9users.io/apis/birthdays/' + month)
+    $.getJSON('/apis/birthdays/' + month)
     .then(data => {
         console.log(data);
         data.sort((a,b) => a.firstname - b.firstname);
