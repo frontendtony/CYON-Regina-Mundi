@@ -3,18 +3,18 @@ const router = express.Router();
 const middleware = require('../middleware');
 const passport = require('passport');
 
-router.get('/', middleware.isLoggedIn, function(req, res) {
+router.get('/', middleware.isLoggedIn, (req, res) => {
     res.render('landing', {title: 'CYON Regina-Mundi'});
 });
 
 
-router.get('/login', function(req, res) {
+router.get('/login', (req, res) => {
     res.render('login', {title: 'Login'});
 });
 
 
-router.post('/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
         if (err) { return next(err); }
         if (!user) { req.flash('error', 'Invalid email/password'); return res.redirect('/login'); }
         req.logIn(user, function(err) {
@@ -26,7 +26,7 @@ router.post('/login', function(req, res, next) {
 });
 
 
-router.get('/logout', function(req, res) {
+router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success', 'You have been logged out');
     res.redirect('/login');
@@ -37,6 +37,10 @@ router.get('/userControl', (req, res) => {
     res.render('userControl');
 })
 
+
+router.get('/birthdays', middleware.isLoggedIn, (req, res) => {
+    res.render('birthdays');
+})
 
 
 module.exports = router;

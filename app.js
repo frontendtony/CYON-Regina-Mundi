@@ -6,16 +6,15 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
 const User = require('./models/user');
-const seedDb = require('./models/seed');
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
+const apiRoute = require('./routes/apis');
+
 
 mongoose.connect(process.env.CYONDB);
 
-// seedDb();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -51,6 +50,7 @@ app.use(function(req, res, next){
 
 app.use(indexRoute);
 app.use(userRoute);
+app.use(apiRoute);
 
 
 app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', function() {

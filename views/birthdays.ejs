@@ -1,0 +1,40 @@
+<% include ./partials/header %>
+
+<link rel='stylesheet' type='text/css' href='stylesheets/birthdays.css'>
+
+<div class='ui small raised container segment'>
+    <select class='ui search selection dropdown' id='month' name='month' />
+        <option value='' selected>Select month</option>
+        <option value='00'>January</option>
+        <option value='01'>February</option>
+        <option value='02'>March</option>
+        <option value='03'>April</option>
+        <option value='04'>May</option>
+        <option value='05'>June</option>
+        <option value='06'>July</option>
+        <option value='07'>August</option>
+        <option value='08'>September</option>
+        <option value='19'>October</option>
+        <option value='10'>November</option>
+        <option value='11'>December</option>
+    </select>
+    
+    
+    <table class="ui striped table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Date</th>
+          <th>Phone Number</th>
+          <th>E-mail</th>
+        </tr>
+      </thead>
+      <tbody class='capitalize'>
+        
+      </tbody>
+    </table>
+</div>
+
+<script src='/js/birthdays.js'></script>
+<% include ./partials/footer %>
