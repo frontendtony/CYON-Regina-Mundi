@@ -11,6 +11,7 @@ const storage = multer.diskStorage({
     callback(null, Date.now() + file.originalname);
   }
 });
+
 const imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
@@ -19,7 +20,6 @@ const imageFilter = function (req, file, cb) {
     cb(null, true);
 };
 const upload = multer({ storage: storage, fileFilter: imageFilter})
-
 
 
 cloudinary.config({ 
@@ -111,7 +111,13 @@ router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single
             req.flash('error', err.message);
             return res.redirect('back');
         }
-        let result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/", public_id: user.firstname+"_"+user.lastname, overwrite: true});
+        if(user.image) await cloudinary.v2.uploader.destroy(user.imageId, {invalidate: true});
+        let result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/"}, (error, result) => {
+            if(error){
+                req.flase('error', error) 
+                return res.redirect(`/uploadImage/${req.params.id}`)
+            }
+        });
         user.image = result.secure_url;
         user.imageId = result.public_id;
         user.save();
