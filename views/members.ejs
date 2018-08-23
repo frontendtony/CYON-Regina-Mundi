@@ -11,7 +11,7 @@
     <% if(members[i]['currentPosition'] === 'president'){ %>
       <div class="ui card" style='margin: 20px'>
         <div class="image">
-          <img src='<%= members[i]["image"] %>'>
+          <img src='<%= members[i]["image"] || "https://via.placeholder.com/400?text=image unavailable" %>'>
         </div>
         <div class="content capitalize">
           <div class="header"><%= members[i]['firstname'] %> <%= members[i]['lastname'] %></div>
@@ -29,7 +29,7 @@
     <% if(members[i]['currentPosition'] === 'vice president'){ %>
       <div class="ui card" style='margin: 20px'>
         <div class="image">
-          <img src='<%= members[i]["image"] %>'>
+          <img src='<%= members[i]["image"] || "https://via.placeholder.com/400?text=image unavailable" %>'>
         </div>
         <div class="content capitalize">
           <div class="header"><%= members[i]['firstname'] %> <%= members[i]['lastname'] %></div>
@@ -53,7 +53,7 @@
         <% if(members[i]['currentPosition'] !== 'president' && members[i]['currentPosition'] !== 'vice president'){ %>
         <div class="ui card">
           <div class="image">
-            <img src="<%= members[i].image %>">
+            <img src='<%= members[i].image || "https://via.placeholder.com/400?text=image unavailable" %>'>
           </div>
           <div class="content capitalize">
             <div class="header"><%= members[i].firstname %> <%= members[i].lastname %></div>
@@ -84,7 +84,7 @@
       <% if(!members[i]['isExecutive']){ %>
         <div class="ui card">
           <div class="image">
-            <img src="<%= members[i].image %>">
+            <img src='<%= members[i].image || "https://via.placeholder.com/400?text=image unavailable" %>'>
           </div>
           <div class="content capitalize">
             <div class="header"><%= members[i].firstname %> <%= members[i].lastname %></div>
