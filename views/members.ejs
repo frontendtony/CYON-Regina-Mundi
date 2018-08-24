@@ -21,21 +21,21 @@
     </a>
   </div>
 
-
-  <div class="ui card" style='margin: 20px'>
-    <div class="image">
-      <img src='<%= vicePresident["image"] %>'>
+  <% if(vicePresident){ %>
+    <div class="ui card" style='margin: 20px'>
+      <div class="image">
+        <img src='<%= vicePresident["image"] %>'>
+      </div>
+      <div class="content capitalize">
+        <div class="header"><%= vicePresident['firstname'] %> <%= vicePresident['lastname'] %></div>
+        <div class="meta">Vice President</div>
+      </div>
+      <a class="ui large teal bottom attached button" href="/members/<%= vicePresident['_id'] %>">
+        <i class="user icon"></i>
+        View Profile
+      </a>
     </div>
-    <div class="content capitalize">
-      <div class="header"><%= vicePresident['firstname'] %> <%= vicePresident['lastname'] %></div>
-      <div class="meta">Vice President</div>
-    </div>
-    <a class="ui large teal bottom attached button" href="/members/<%= vicePresident['_id'] %>">
-      <i class="user icon"></i>
-      View Profile
-    </a>
-  </div>
-  
+  <% } %>
 </div>
 
 <!-- Other Executives -->
