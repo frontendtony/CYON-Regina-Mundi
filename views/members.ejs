@@ -7,65 +7,54 @@
 
 <!-- President & Vice -->
 <div class='ui centered cards' style='margin: 20px'>
-  <% for(var i=0; i<members.length; i++){ %>
-    <% if(members[i]['currentPosition'] === 'president'){ %>
-      <div class="ui card" style='margin: 20px'>
-        <div class="image">
-          <img src='<%= members[i]["image"] || "https://via.placeholder.com/400?text=image unavailable" %>'>
-        </div>
-        <div class="content capitalize">
-          <div class="header"><%= members[i]['firstname'] %> <%= members[i]['lastname'] %></div>
-          <div class="meta">President</div>
-        </div>
-        <a class="ui large teal bottom attached button" href="/members/<%= members[i]['_id'] %>">
-          <i class="user icon"></i>
-          View Profile
-        </a>
-      </div>
-    <% } %>
-  <% } %>
+  <div class="ui card" style='margin: 20px'>
+    <div class="image">
+      <img src='<%=president["image"] %>'>
+    </div>
+    <div class="content capitalize">
+      <div class="header"><%= president['firstname'] %> <%= president['lastname'] %></div>
+      <div class="meta">President</div>
+    </div>
+    <a class="ui large teal bottom attached button" href="/members/<%= president['_id'] %>">
+      <i class="user icon"></i>
+      View Profile
+    </a>
+  </div>
 
-  <% for(var i=0; i<members.length; i++){ %>
-    <% if(members[i]['currentPosition'] === 'vice president'){ %>
-      <div class="ui card" style='margin: 20px'>
-        <div class="image">
-          <img src='<%= members[i]["image"] || "https://via.placeholder.com/400?text=image unavailable" %>'>
-        </div>
-        <div class="content capitalize">
-          <div class="header"><%= members[i]['firstname'] %> <%= members[i]['lastname'] %></div>
-          <div class="meta">Vice President</div>
-        </div>
-        <a class="ui large teal bottom attached button" href="/members/<%= members[i]['_id'] %>">
-          <i class="user icon"></i>
-          View Profile
-        </a>
-      </div>
-    <% } %>
-  <% } %>
+
+  <div class="ui card" style='margin: 20px'>
+    <div class="image">
+      <img src='<%= vicePresident["image"] %>'>
+    </div>
+    <div class="content capitalize">
+      <div class="header"><%= vicePresident['firstname'] %> <%= vicePresident['lastname'] %></div>
+      <div class="meta">Vice President</div>
+    </div>
+    <a class="ui large teal bottom attached button" href="/members/<%= vicePresident['_id'] %>">
+      <i class="user icon"></i>
+      View Profile
+    </a>
+  </div>
   
 </div>
 
 <!-- Other Executives -->
 <div class='ui padded container'>
-  <div class="ui four stackable cards">
-    <% for(var i=0; i<members.length; i++){ %>
-      <% if(members[i]['isExecutive']){ %>
-        <% if(members[i]['currentPosition'] !== 'president' && members[i]['currentPosition'] !== 'vice president'){ %>
-        <div class="ui card">
-          <div class="image">
-            <img src='<%= members[i].image || "https://via.placeholder.com/400?text=image unavailable" %>'>
-          </div>
-          <div class="content capitalize">
-            <div class="header"><%= members[i].firstname %> <%= members[i].lastname %></div>
-            <div class="meta"><%= members[i].currentPosition %></div>
-          </div>
-          <a class="ui large teal bottom attached button" href="/members/<%= members[i]['_id'] %>">
-            <i class="user icon"></i>
-            View Profile
-          </a>
+  <div class="ui four raised doubling cards">
+    <% for(let exec of executives){ %>
+      <div class="ui card">
+        <div class="image">
+          <img src='<%= exec.image %>'>
         </div>
-        <% } %>
-      <% } %>
+        <div class="content capitalize">
+          <div class="header"><%= exec.firstname %> <%= exec.lastname %></div>
+          <div class="meta"><%= exec.currentPosition %></div>
+        </div>
+        <a class="ui large teal bottom attached button" href="/members/<%= exec['_id'] %>">
+          <i class="user icon"></i>
+          View Profile
+        </a>
+      </div>
     <% } %>
   </div>
 </div>
@@ -79,22 +68,20 @@
 
 <!-- Members -->
 <div class='ui padded container'>
-  <div class="ui five stackable cards">
-    <% for(var i=0; i<members.length; i++){ %>
-      <% if(!members[i]['isExecutive']){ %>
+  <div class="ui five raised doubling cards">
+    <% for(let member of members){ %>
         <div class="ui card">
           <div class="image">
-            <img src='<%= members[i].image || "https://via.placeholder.com/400?text=image unavailable" %>'>
+            <img src='<%= member.image %>'>
           </div>
           <div class="content capitalize">
-            <div class="header"><%= members[i].firstname %> <%= members[i].lastname %></div>
+            <div class="header"><%= member.firstname %> <%= member.lastname %></div>
           </div>
-          <a class="ui large teal bottom attached button" href="/members/<%= members[i]['_id'] %>">
+          <a class="ui large teal bottom attached button" href="/members/<%= member['_id'] %>">
             <i class="user icon"></i>
             View Profile
           </a>
         </div>
-      <% } %>
     <% } %>
   </div>
 </div>
