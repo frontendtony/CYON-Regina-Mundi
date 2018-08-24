@@ -11,7 +11,7 @@ const User = require('./models/user');
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 const apiRoute = require('./routes/apis');
-
+require('dotenv').config();
 
 mongoose.connect(process.env.CYONDB);
 
@@ -26,7 +26,7 @@ app.use(flash());
 
 //PASSPORT CONFIGURATION
 app.use(session({
-    secret: 'secret',
+    secret: process.env.PASSPORT_SECRET,
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({mongooseConnection: mongoose.connection})

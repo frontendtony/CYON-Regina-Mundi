@@ -4,6 +4,7 @@ const User = require('../models/user');
 const passport = require('passport');
 const moment = require('moment');
 const middleware = require('../middleware');
+require('dotenv').config();
 const cloudinary = require('cloudinary');
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -23,9 +24,9 @@ const upload = multer({ storage: storage, fileFilter: imageFilter})
 
 
 cloudinary.config({ 
-  cloud_name: 'tonerolima', 
-  api_key: '495368473539414', 
-  api_secret: 'UrVOleILaWLRAM_yFAHdGp0S-uc'
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 
