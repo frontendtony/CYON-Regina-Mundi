@@ -66,8 +66,8 @@ router.get('/members', middleware.isLoggedIn, (req, res) =>{
             newObj.image = member.imageId? cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true}): "https://via.placeholder.com/400?text=image unavailable";
             return newObj;
         })
-        let president = members.filter(member => member.currentPosition === 'president');
-        let vicePresident = members.filter(member => member.currentPosition === 'vice president');
+        let president = members.filter(member => member.currentPosition === 'president')[0];
+        let vicePresident = members.filter(member => member.currentPosition === 'vice president')[0];
         let floorMembers =  members.filter(member => member.isExecutive === false);
         let executives =  members.filter(member => member.isExecutive === true && !member.currentPosition.match(/[president]$/));
         res.render('members', { members: floorMembers, president: president, vicePresident: vicePresident, executives: executives });
