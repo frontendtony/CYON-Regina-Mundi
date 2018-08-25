@@ -94,3 +94,7 @@ body {
 .capitalize {
   text-transform: capitalize;
 }
+
+.white.text {
+    color: #fff !important;
+}

@@ -25,7 +25,9 @@ const UserSchema = new mongoose.Schema({
 	isExecutive: { type: Boolean, default: false},
 	currentPosition: { type: String, lowercase:true, default: 'member'},
 	verified: { type: Boolean, default: false},
-	dateJoined: { type: Date, default: Date.now }
+	dateJoined: { type: Date, default: Date.now },
+	resetPasswordToken: String,
+    resetPasswordExpires: Date,
 });
 
 UserSchema.plugin(passportLocalMongoose);
