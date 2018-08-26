@@ -156,7 +156,7 @@ router.post('/reset/:token', (req, res) => {
 });
 
 
-router.get('/userControl', (req, res) => {
+router.get('/userControl', middleware.isLoggedIn, middleware.isAdmin, (req, res) => {
     User.find({}, 'firstname lastname currentPosition' ,(err, users) => {
       if(err){
         req.flash('error', "Sever error, please contact the admin")
