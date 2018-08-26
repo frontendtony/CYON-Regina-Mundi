@@ -21,8 +21,8 @@ select.ui.dropdown {
 }
 
 @media only screen and (max-width: 767px){
-    .ui.two.column.stackable.grid>.column.capitalize {
-        margin-bottom: 25px !important;
+    .ui.three.column.stackable.grid>.column.header {
+        margin-top: 30px !important;
         padding-top: 0 !important;
     }
 }

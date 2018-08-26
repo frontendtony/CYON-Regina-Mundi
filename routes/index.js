@@ -157,7 +157,13 @@ router.post('/reset/:token', (req, res) => {
 
 
 router.get('/userControl', (req, res) => {
-    res.render('userControl');
+    User.find({}, 'firstname lastname currentPosition' ,(err, users) => {
+      if(err){
+        req.flash('error', "Sever error, please contact the admin")
+        return res.redirect('/');
+      }
+      res.render('userControl', {members: users});
+    })
 })
 
 

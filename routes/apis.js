@@ -14,4 +14,16 @@ router.get('/apis/birthdays/:month', (req, res) => {
 });
 
 
+router.get('/apis/updatePosition/:id/:position', (req, res) => {
+    User.findOneAndUpdate({currentPosition: req.params.position}, {isExecutive: false, currentPosition: 'member'}, (err, exec) => {
+        if(err) return res.send('Could not fetch data, please try again later.');
+    });
+    
+    User.findByIdAndUpdate(req.params.id, {currentPosition: req.params.position, isExecutive: true}, (err, executive) => {
+        if(err) return res.json({'status': false, 'message': 'Could not fetch data, please try again later.'});
+        res.json({'status': true});
+    });
+});
+
+
 module.exports = router;
