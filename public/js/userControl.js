@@ -18,7 +18,7 @@ $('.ui.form').on('click', 'button', function(event){
             if(data.status){
                 $('<div class="ui positive message container"><i class="close icon"></i>Position Updated</div>').insertAfter('nav');
                 $('.ui.positive.message.container').fadeOut(3000);
-                $('button').parent().remove();
+                $('#button-div').remove();
             }
         })
     }
@@ -27,8 +27,8 @@ $('.ui.form').on('click', 'button', function(event){
 
 $('select').on('change',function(event){
     event.preventDefault();
-    $('button').parent().remove();
-    let buttons = $("<div class='five wide column'><button class='ui positive button'>Save</button><button class='ui negative button'>Cancel</button></div>");
+    $('#button-div').remove();
+    let buttons = $("<div id='button-div' class='five wide column'><button class='ui positive button'>Save</button><button class='ui negative button'>Cancel</button></div>");
     buttons.insertAfter(this.parentNode.parentNode);
     
 })
