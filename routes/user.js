@@ -69,9 +69,10 @@ router.get('/members', middleware.isLoggedIn, (req, res) =>{
         })
         let president = members.filter(member => member.currentPosition === 'president')[0];
         let vicePresident = members.filter(member => member.currentPosition === 'vice president')[0];
+        let queen = members.filter(member => member.currentPosition === 'queen')[0];
         let floorMembers =  members.filter(member => member.isExecutive === false);
         let executives =  members.filter(member => member.isExecutive === true && !member.currentPosition.match(/[president]$/));
-        res.render('members', { members: floorMembers, president: president, vicePresident: vicePresident, executives: executives });
+        res.render('members', { members: floorMembers, president: president, queen: queen, vicePresident: vicePresident, executives: executives });
     })
 })
 

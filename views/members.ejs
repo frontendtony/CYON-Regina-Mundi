@@ -41,6 +41,25 @@
 <!-- Other Executives -->
 <div class='ui padded container'>
   <div class="ui four raised doubling cards">
+      <div class="ui card">
+        <div class="image">
+          <img src='<%= queen.image %>'>
+        </div>
+        <div class="content capitalize">
+          <div class="header"><%= queen.firstname %> <%= queen.lastname %></div>
+          <div class="meta"><%= queen.currentPosition %></div>
+        </div>
+        <a class="ui large teal bottom attached button" href="/members/<%= queen['_id'] %>">
+          <i class="user icon"></i>
+          View Profile
+        </a>
+      </div>
+  </div>
+</div>
+
+
+<div class='ui padded container'>
+  <div class="ui four raised doubling cards">
     <% for(let exec of executives){ %>
       <div class="ui card">
         <div class="image">
