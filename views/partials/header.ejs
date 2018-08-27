@@ -51,7 +51,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/birthdays">Birthdays</a>
                     </li>
-                    <% if(currentUser.isAdmin){ %>
+                    <% if(currentUser && currentUser.isAdmin){ %>
                         <li class="nav-item">
                             <a class="nav-link" href="/userControl">Admin Panel</a>
                         </li>
