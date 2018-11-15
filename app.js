@@ -11,6 +11,7 @@ const User = require('./models/user');
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 const apiRoute = require('./routes/apis');
+const committeesRoute = require('./routes/committees');
 require('dotenv').config();
 
 mongoose.connect(process.env.CYONDB);
@@ -51,6 +52,7 @@ app.use(function(req, res, next){
 app.use(indexRoute);
 app.use(userRoute);
 app.use(apiRoute);
+app.use(committeesRoute);
 
 
 app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', function() {
