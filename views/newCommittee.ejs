@@ -1,0 +1,52 @@
+<% include ./partials/header %>
+
+<div class="ui raised container segment">
+  <form class="ui form new-committee">
+    <h2 class="form-title">Add new committee</h2>
+    <div class="field">
+      <label>Title</label>
+      <input
+        type="text"
+        Placeholder="Enter name of committee in full"
+        name="title"
+      >
+    </div>
+    <div class="field">
+      <label>Purpose</label>
+      <textarea
+        type="text"
+        Placeholder="Committee's main objective"
+        name="purpose"
+      ></textarea>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <label>Start Date</label>
+        <input type="date" name="start-date">
+      </div>
+      <div class="field">
+        <label>End Date</label>
+        <input type="date" name="end-date">
+      </div>
+    </div>
+    <div class="field">
+      <label>Chairman</label>
+      <select class='ui fluid dropdown'>
+        <option value=''>Select</option>
+        <option value='Ugochukwu Johnson'>Ugochukwu Johnson</option>
+        <option value='Samuel Obi'>Samuel Obi</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Members</label>
+      <select multiple class='ui fluid search dropdown'>
+        <option value=''>Select</option>
+        <option value='Ugochukwu Johnson'>Ugochukwu Johnson</option>
+        <option value='Samuel Obi'>Samuel Obi</option>
+      </select>
+    </div>
+  </form>
+</div>
+
+<link rel='stylesheet' type='text/css' href='/stylesheets/committee.css'>
+<% include ./partials/footer %>
