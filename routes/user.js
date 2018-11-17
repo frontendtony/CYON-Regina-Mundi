@@ -112,24 +112,29 @@ router.get('/uploadImage/:id', middleware.isLoggedIn, (req, res) => {
 
 
 router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single('image'), (req, res) => {
-    User.findById(req.user._id, async (err, user) =>{
+    User.findById(req.user._id, async (err, user) => {
         if(err){
             req.flash('error', err.message);
             return res.redirect('back');
         }
-        if(user.image) await cloudinary.v2.uploader.destroy(user.imageId, {invalidate: true});
-        let result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/"}, (error, result) => {
-            if(error){
-                req.flase('error', error) 
-                return res.redirect(`/uploadImage/${req.params.id}`)
-            }
-        });
-        user.image = result.secure_url;
-        user.imageId = result.public_id;
-        user.save();
-        res.redirect('/members/' + user._id);
-    })
-})
+        if (user.image) {
+            const { imgageId } = user;
+            await cloudinary.v2.uploader.destroy(imageId, {invalidate: true});
+        }
+        try {
+            const result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/"});
+            user.image = result.secure_url;
+            user.imageId = result.public_id;
+            user.save();
+            res.redirect('/members/' + user._id);
+            
+        } catch(error) {
+            console.log(error)
+            req.flash('error', error);
+            return res.redirect(`/uploadImage/${req.params.id}`);
+        }
+    });
+});
 
 
 module.exports = router;
