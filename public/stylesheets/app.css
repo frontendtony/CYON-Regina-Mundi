@@ -95,6 +95,19 @@ body {
   text-transform: capitalize;
 }
 
+.cap-first-letter {
+  text-transform: lowercase !important;
+}
+
+.cap-first-letter::first-letter {
+  text-transform: uppercase !important;
+}
+
+.lowercase {
+  text-transform: lowercase !important;
+}
+  
+
 .white.text {
     color: #fff !important;
 }

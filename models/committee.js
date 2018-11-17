@@ -14,15 +14,17 @@ const CommitteeSchema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User
+    ref: 'User'
   },
 	chairman: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User
+    ref: 'User',
+    required: true
   },
 	members: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: User
+    ref: 'User',
+    required: true
   }],
 	meetingSchedule: {
     type: String,
@@ -30,6 +32,10 @@ const CommitteeSchema = new mongoose.Schema({
   },
 	startDate: {
     type: Date,
+    default: Date.now
+  },
+  endDate: {
+    type: Date
   }
 });
 

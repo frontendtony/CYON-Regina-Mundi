@@ -1,0 +1,18 @@
+<% include ./partials/header %>
+
+<% const { _id, title } = committee %>
+<div class="ui padded container segment confirm-delete">
+  <h3>
+    Are you sure you want to delete this committee?
+  </h3>
+  <div class="ui segment">
+    <p class="capitalize"><%= title %></p>
+  </div>
+  <a href="/committees" class="ui teal button">Cancel</a>
+  <form class="inline form" action="/committees/<%= _id %>?_method=DELETE" method="POST">
+    <input type="submit" class="ui negative button" value="Delete">
+  </form>
+</div>
+
+<link rel='stylesheet' type='text/css' href='/stylesheets/committees.css'>
+<% include ./partials/footer %>

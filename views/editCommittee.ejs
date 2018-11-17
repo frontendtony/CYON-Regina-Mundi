@@ -1,14 +1,18 @@
 <% include ./partials/header %>
 
+<% const { _id, title, purpose, chairman, members, startDate } = committee %>
 <div class="ui raised container segment">
-  <form class="ui form new-committee" action="/committees" method="POST">
-    <h2 class="form-title">Add new committee</h2>
+  <form class="ui form new-committee"
+    action="/committees/<%= _id %>?_method=PUT" method="POST"
+  >
+    <h2 class="form-title">Edit committee</h2>
     <div class="field">
       <label>Title</label>
       <input
         type="text"
         Placeholder="Enter name of committee in full"
-        name="committee[title]"
+        name="committee[title]",
+        value="<%= title %>"
       >
     </div>
     <div class="field">
@@ -17,26 +21,33 @@
         type="text"
         Placeholder="Committee's main objective"
         name="committee[purpose]"
-      ></textarea>
+      ><%= purpose %></textarea>
     </div>
     <div class="field">
       <label>Start Date</label>
-      <input type="date" name="committee[startDate]">
+      <input type="date"
+        name="committee[startDate]",
+        value="<%= moment(startDate).format('YYYY-MM-DD') %>"
+      >
     </div>
     <div class="field">
       <label>Chairman</label>
-      <select class='ui fluid dropdown capitalize' name="committee[chairman]">
+      <select class='ui fluid dropdown capitalize chairman'
+        name="committee[chairman]"
+      >
         <option value=''>Select</option>
         <% users.forEach((user) => { %>
           <option value="<%= user._id %>" class="capitalize">
             <%= user.firstname %> <%= user.lastname %>
           </option>
         <% }) %>
+        <option value='Ugochukwu Johnson'>Ugochukwu Johnson</option>
+        <option value='Samuel Obi'>Samuel Obi</option>
       </select>
     </div>
     <div class="field">
       <label>Members</label>
-      <select multiple class='ui fluid search dropdown'
+      <select multiple class='ui fluid search dropdown members'
         name="committee[members]"
       >
         <option value=''>Select</option>
@@ -47,10 +58,25 @@
         <% }) %>
       </select>
     </div>
-    <input class="ui button login" type="submit" value="Create Committee">
+    <input class="ui button" type="submit" value="Update Committee">
     <a class="ui inverted button" href="/committees">Cancel</a>
   </form>
 </div>
+
+<script>
+  window.onload = () => {
+    $('.ui.fluid.dropdown.chairman')
+      .dropdown('set selected','<%= chairman._id %>');
+
+    $('.ui.fluid.dropdown.members')
+      .dropdown('set selected', [
+        <% members.forEach((member) => { %>
+          '<%= member %>',
+        <% }) %>
+      ]
+    );
+  }
+</script>
 
 <link rel='stylesheet' type='text/css' href='/stylesheets/committee.css'>
 <% include ./partials/footer %>

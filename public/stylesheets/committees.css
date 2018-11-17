@@ -14,6 +14,20 @@
   margin-bottom: 30px !important;
 }
 
+.circular.ui.icon.button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.confirm-delete.segment {
+  max-width: 600px !important;
+}
+
+.inline.form {
+  display: inline !important;
+}
+
 @media screen and (max-width: 767px) {
   .two.column.stackable.grid > .property-name {
     padding-bottom: 0 !important;
@@ -25,5 +39,9 @@
 
   .ui.small.segment {
     padding-left: 0 !important;
+  }
+
+  .ui.basic.button:first-of-type {
+    margin-left: 21px;
   }
 }
