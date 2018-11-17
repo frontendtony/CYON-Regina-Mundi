@@ -42,15 +42,17 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home<span class="sr-only"></span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/members">Members</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/committees">Committees</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/birthdays">Birthdays</a>
-                    </li>
+                    <% if(currentUser){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/members">Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/committees">Committees</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/birthdays">Birthdays</a>
+                        </li>
+                    <% } %>
                     <% if(currentUser && currentUser.isAdmin){ %>
                         <li class="nav-item">
                             <a class="nav-link" href="/userControl">Admin Panel</a>
