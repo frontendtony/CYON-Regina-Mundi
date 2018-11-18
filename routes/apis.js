@@ -1,29 +1,40 @@
 const express = require('express');
-const router = express.Router();
-// const middleware = require('../middleware');
-const User = require('../models/user');
 const moment = require('moment');
+const User = require('../models/user');
+
+const router = express.Router();
 
 
-router.get('/apis/birthdays/:month', (req, res) => {
-    User.find( {}, 'firstname lastname gender dateOfBirth email phone', (err, members) => {
-        if(err) return res.send('Could not fetch data, please try again later.');
-        let results = members.filter(member => moment(member.dateOfBirth).month() == req.params.month );
-        res.json(results);
+router.get('/apis/birthdays/:month', async (req, res) => {
+  try {
+    const members = await User.find(
+      {}, 'firstname lastname gender dateOfBirth email phone',
+    );
+    const result = members.filter((member) => {
+      const month = moment(member.dateOfBirth).month();
+      return month === Number(req.params.month);
     });
+    return res.json(result);
+  } catch (error) {
+    return res.send('Could not fetch data, please try again later');
+  }
 });
 
 
-router.get('/apis/updatePosition/:id/:position', (req, res) => {
-    User.findOneAndUpdate({currentPosition: req.params.position}, {isExecutive: false, currentPosition: 'member'}, (err, exec) => {
-        if(err) return res.send('Could not fetch data, please try again later.');
+router.get('/apis/updatePosition/:id/:position', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentPosition = req.params.position;
+    const updateObject = { isExecutive: false, currentPosition: 'member' };
+    await User.findOneAndUpdate({ currentPosition }, { updateObject });
+    await User.findByIdAndUpdate(id, { currentPosition, isExecutive: true });
+    return res.json({ status: true });
+  } catch (error) {
+    return res.json({
+      status: false,
+      message: 'Could not fetch data, please try again later',
     });
-    
-    User.findByIdAndUpdate(req.params.id, {currentPosition: req.params.position, isExecutive: true}, (err, executive) => {
-        if(err) return res.json({'status': false, 'message': 'Could not fetch data, please try again later.'});
-        res.json({'status': true});
-    });
+  }
 });
-
 
 module.exports = router;

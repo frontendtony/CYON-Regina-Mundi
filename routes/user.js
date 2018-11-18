@@ -1,140 +1,167 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id", "_doc"] }] */
 const express = require('express');
-const router = express.Router();
-const User = require('../models/user');
 const passport = require('passport');
 const moment = require('moment');
-const middleware = require('../middleware');
-require('dotenv').config();
 const cloudinary = require('cloudinary');
 const multer = require('multer');
+const { isLoggedIn, verifyAccountOwnership } = require('../middleware');
+const User = require('../models/user');
+
+const router = express.Router();
+
 const storage = multer.diskStorage({
-  filename: function(req, file, callback) {
+  filename(req, file, callback) {
     callback(null, Date.now() + file.originalname);
-  }
+  },
 });
 
-const imageFilter = function (req, file, cb) {
-    // accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error('Only image files are allowed!'), false);
-    }
-    cb(null, true);
+const imageFilter = (req, file, cb) => {
+  // accept image files only
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+    return cb(new Error('Only image files are allowed!'), false);
+  }
+  return cb(null, true);
 };
-const upload = multer({ storage: storage, fileFilter: imageFilter})
+const upload = multer({ storage, fileFilter: imageFilter });
 
-
-cloudinary.config({ 
+cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 
 router.get('/register', (req, res) => {
-    if(req.user){
-        req.flash('error', 'You are already logged in');
-        return res.redirect('/');
+  if (req.user) {
+    req.flash('error', 'You are already logged in');
+    return res.redirect('/');
+  }
+  return res.render('register');
+});
+
+router.post('/register', async (req, res) => {
+  const { newUser, password } = req.body;
+  newUser.email = req.body.username;
+  newUser.username = req.body.username;
+  try {
+    const user = await User.register(newUser, password);
+    passport.authenticate('local')(req, res, () => {
+      const id = user._id;
+      return res.redirect(`/uploadImage/${id}`);
+    });
+  } catch (error) {
+    if (error.name === 'UserExistsError') {
+      req.flash('error', 'A user already exists with the same email');
+    } else {
+      req.flash('error', 'Something went wrong, contact the system admin');
     }
-    res.render('register');
+    return res.render('register', { title: 'Sign Up', newUser });
+  }
+  return res.render('register', { title: 'Sign Up', newUser });
 });
 
-
-router.post('/register', (req, res) => {
-    let newUser = req.body.newUser;
-    newUser.email = req.body.username;
-    newUser.username = req.body.username;
-    User.register(newUser, req.body.password, (err, user) => {
-        if (err) {
-            if (err.name === 'UserExistsError') {
-                req.flash('error', 'A user already exists with the same email');
-            }
-            return res.render('register', { title: 'Sign Up', newUser: newUser });
-        }
-        passport.authenticate('local')(req, res, () => {
-            res.redirect('/uploadImage/'+user._id);
-        });
-    });
-})
-
-
-router.get('/members', middleware.isLoggedIn, (req, res) =>{
-    User.find((err, members) => {
-        if(err){
-            return res.redirect('/')
-        }
-        members.map(member => {
-            let newObj = member;
-            newObj.image = member.imageId? cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true}): "https://via.placeholder.com/400?text=image unavailable";
-            return newObj;
-        })
-        let president = members.filter(member => member.currentPosition === 'president')[0];
-        let vicePresident = members.filter(member => member.currentPosition === 'vice president')[0];
-        let queen = members.filter(member => member.currentPosition === 'queen')[0];
-        let floorMembers =  members.filter(member => member.isExecutive === false);
-        let executives =  members.filter(member => member.isExecutive === true && !member.currentPosition.match(/[president]$/));
-        res.render('members', { members: floorMembers, president: president, queen: queen, vicePresident: vicePresident, executives: executives });
-    })
-})
-
-
-router.get('/members/:id', middleware.isLoggedIn, (req, res) => {
-    User.findById(req.params.id, (err, member) => {
-        if(err){
-            return res.redirect('/members');
-        }
-        member.image = cloudinary.url(member.imageId, {height: 400, width: 400, crop: "fill", gravity: "face:center", secure: true});
-        member.birthday = moment(member.dateOfBirth).format("MMMM Do");
-        res.render('member', {member: member});
-    })
-})
-
-
-router.get('/members/:id/edit', middleware.isLoggedIn, middleware.verifyAccountOwnership, (req, res) => {
-    User.findById(req.params.id, (err, member) => {
-        if(err) return res.redirect('/members');
-        member.birthday = moment(member.dateOfBirth).format("YYYY-MM-DD");
-        res.render('editProfile', {member: member});
-    })
-})
-
-
-router.put('/members/:id/edit', middleware.isLoggedIn, middleware.verifyAccountOwnership, (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body.user, (err, user) => {
-        if(err) return res.redirect(`/members/${req.params.id}/edit`);
-        res.redirect(`/members/${req.params.id}`);
-    })
-})
-
-
-router.get('/uploadImage/:id', middleware.isLoggedIn, (req, res) => {
-    res.render('imageUpload', {userId: req.params.id});
-})
-
-
-router.post("/uploadImage/:id", middleware.verifyAccountOwnership, upload.single('image'), (req, res) => {
-    User.findById(req.user._id, async (err, user) => {
-        if(err){
-            req.flash('error', err.message);
-            return res.redirect('back');
-        }
-        if (user.image) {
-            const { imgageId } = user;
-            await cloudinary.v2.uploader.destroy(imageId, {invalidate: true});
-        }
-        try {
-            const result = await cloudinary.v2.uploader.upload(req.file.path, {folder: "cyon/"});
-            user.image = result.secure_url;
-            user.imageId = result.public_id;
-            user.save();
-            res.redirect('/members/' + user._id);
-            
-        } catch(error) {
-            console.log(error)
-            req.flash('error', error);
-            return res.redirect(`/uploadImage/${req.params.id}`);
-        }
-    });
+router.get('/members', isLoggedIn, async (req, res) => {
+  const members = await User.find().exec();
+  const users = await members.map((member) => {
+    const newObj = member._doc;
+    newObj.image = member.imageId
+      ? cloudinary.url(member.imageId, {
+        height: 400,
+        width: 400,
+        crop: 'fill',
+        gravity: 'face:center',
+        secure: true,
+      })
+      : 'https://via.placeholder.com/400?text=image_unavailable';
+    return newObj;
+  });
+  const president = users.find(m => m.currentPosition === 'president');
+  const vice = users.find(m => m.currentPosition === 'vice president');
+  const queen = users.find(m => m.currentPosition === 'queen');
+  const floorMembers = users.filter(m => m.isExecutive === false);
+  const executives = users.filter((m) => {
+    const { currentPosition, isExecutive } = m;
+    return isExecutive && !currentPosition.match(/[president]$/);
+  });
+  return res.render('members', {
+    members: floorMembers,
+    president,
+    queen,
+    vicePresident: vice,
+    executives,
+  });
 });
 
+router.get('/members/:id', isLoggedIn, async (req, res) => {
+  let member;
+  try {
+    member = await User.findById(req.params.id);
+  } catch (error) {
+    return res.redirect('/members');
+  }
+  member.image = cloudinary.url(member.imageId, {
+    height: 400,
+    width: 400,
+    crop: 'fill',
+    gravity: 'face:center',
+    secure: true,
+  });
+  member.birthday = moment(member.dateOfBirth).format('MMMM Do');
+  return res.render('member', { member });
+});
+
+router.get('/members/:id/edit', isLoggedIn, verifyAccountOwnership,
+  async (req, res) => {
+    let member;
+    try {
+      member = await User.findById(req.params.id);
+    } catch (error) {
+      res.flash('error', 'Something went wrong, contact the system admin');
+      return res.redirect('/members');
+    }
+    member.birthday = moment(member.dateOfBirth).format('YYYY-MM-DD');
+    return res.render('editProfile', { member });
+  });
+
+router.put('/members/:id/edit', isLoggedIn, verifyAccountOwnership,
+  async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.params.id, req.body.user);
+    } catch (error) {
+      res.flash('error', 'Something went wrong, contact the system admin');
+      return res.redirect(`/members/${req.params.id}/edit`);
+    }
+    return res.redirect(`/members/${req.params.id}`);
+  });
+
+router.get('/uploadImage/:id', isLoggedIn, (req, res) => {
+  const { id } = req.params;
+  return res.render('imageUpload', { userId: id });
+});
+
+router.post('/uploadImage/:id', verifyAccountOwnership, upload.single('image'),
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user._id);
+      if (user.image) {
+        const { imageId } = user;
+        await cloudinary.v2.uploader.destroy(imageId, { invalidate: true });
+      }
+      try {
+        const result = await cloudinary.v2.uploader.upload(req.file.path,
+          { folder: 'cyon/' });
+        user.image = result.secure_url;
+        user.imageId = result.public_id;
+        user.save();
+        return res.redirect(`/members/${user._id}`);
+      } catch (error) {
+        req.flash('error', error);
+        return res.redirect(`/uploadImage/${req.params.id}`);
+      }
+    } catch (error) {
+      req.flash('error', error.message);
+      return res.redirect('back');
+    }
+  });
 
 module.exports = router;
