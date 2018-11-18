@@ -1,48 +1,47 @@
-const User = require("../models/user")
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+const User = require('../models/user');
+
 const middlewareObject = {};
 
-middlewareObject.isLoggedIn = function(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        req.flash('error', 'You need to log in first');
-        res.render('login', { source: req.path, title: 'Login' });
+middlewareObject.isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.flash('error', 'You need to log in first');
+  return res.render('login', { source: req.path, title: 'Login' });
+};
+
+middlewareObject.verifyAccountOwnership = async (req, res, next) => {
+  const { id } = req.params;
+  let user;
+  try {
+    user = await User.findById(id);
+    if (!(user._id.equals(req.user._id))) {
+      req.flash('error', 'Access Denied!');
+      return res.redirect(`/members/${id}`);
     }
-}
-
-middlewareObject.verifyAccountOwnership = function(req, res, next) {
-    User.findById(req.params.id, function(err, user) {
-        if (err) {
-            req.flash('error', 'Something went wrong! Please contact the system administrator');
-            return res.redirect('back');
-        } else {
-            if (user._id.equals(req.user._id)) {
-                next();
-            } else {
-                req.flash('error', 'Access Denied!');
-                return res.redirect('/members/' + req.params.id);
-            }
-        }
-    })
+  } catch (error) {
+    req.flash('error', 'Something went wrong, contact the system admin');
+    return res.redirect('back');
+  }
+  return next();
 };
 
 
-middlewareObject.isAdmin = function(req, res, next) {
-    User.findById(req.user._id, function(err, user) {
-        if (err) {
-            req.flash('error', 'Something went wrong! Please contact the system administrator');
-            return res.redirect('/');
-        } else {
-            if (user.isAdmin) {
-                next();
-            } else {
-                req.flash('error', 'Access Denied!');
-                return res.redirect('/');
-            }
-        }
-    })
+middlewareObject.isAdmin = async (req, res, next) => {
+  let user;
+  try {
+    user = await User.findById(req.user._id);
+    if (!user.isAdmin) {
+      req.flash('error', 'Access Denied!');
+      return res.redirect('/');
+    }
+  } catch (error) {
+    req.flash('error', 'Something went wrong, contact the system admin');
+    return res.redirect('back');
+  }
+  return next();
 };
-
 
 
 module.exports = middlewareObject;
