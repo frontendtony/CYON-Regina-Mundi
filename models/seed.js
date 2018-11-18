@@ -1,21 +1,22 @@
-var User = require("./user");
-var faker = require('faker');
+const faker = require('faker');
+const User = require('./user');
 
-var execs = [
-  {currentPosition: 'president'},
-  {currentPosition: 'vice president'},
-  {currentPosition: 'secretary'},
-  {currentPosition: 'assistant secretary'},
-  {currentPosition: 'financial secretary'},
-  {currentPosition: 'welfare'},
-  {currentPosition: 'welfare 2'},
-  {currentPosition: 'provost'},
-  {currentPosition: 'dos'},
-  {currentPosition: 'dos 2'},
+const execs = [
+  { currentPosition: 'president' },
+  { currentPosition: 'vice president' },
+  { currentPosition: 'secretary' },
+  { currentPosition: 'assistant secretary' },
+  { currentPosition: 'financial secretary' },
+  { currentPosition: 'welfare' },
+  { currentPosition: 'welfare 2' },
+  { currentPosition: 'provost' },
+  { currentPosition: 'dos' },
+  { currentPosition: 'dos 2' },
 ];
 
 function seedDB() {
-  execs.forEach(function(exec) {
+  execs.forEach((executive) => {
+    const exec = { ...executive };
     exec.firstname = faker.name.firstName();
     exec.lastname = faker.name.lastName();
     exec.middlename = faker.name.firstName();
@@ -27,18 +28,12 @@ function seedDB() {
     exec.dateOfBirth = faker.date.past();
     exec.gender = 'male';
 
-    User.create(exec, function (err, user) {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log('User > '+user.firstname+' created');
-      }
-    });
+    User.create(exec);
   });
 
-  var num = 0;
+  let num = 0;
   do {
-    var member = {};
+    const member = {};
     member.firstname = faker.name.firstName();
     member.lastname = faker.name.lastName();
     member.middlename = faker.name.firstName();
@@ -49,17 +44,9 @@ function seedDB() {
     member.dateOfBirth = faker.date.past();
     member.gender = 'male';
 
-    User.create(member, function(err, user) {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log('User > ' + user.firstname + ' created');
-      }
-    });
-
-    num++
+    User.create(member);
+    num += 1;
   } while (num < 20);
-
 }
 
 module.exports = seedDB;

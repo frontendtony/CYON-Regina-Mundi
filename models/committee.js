@@ -1,42 +1,42 @@
 const mongoose = require('mongoose');
 
 const CommitteeSchema = new mongoose.Schema({
-	title: {
-    type:String,
+  title: {
+    type: String,
     lowercase: true,
     unique: true,
-    required: true 
+    required: true,
   },
-	purpose: { 
-    type:String,
+  purpose: {
+    type: String,
     lowercase: true,
-    required: true
+    required: true,
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
   },
-	chairman: {
+  chairman: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
-	members: [{
+  members: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   }],
-	meetingSchedule: {
+  meetingSchedule: {
     type: String,
-    lowercase: true
+    lowercase: true,
   },
-	startDate: {
+  startDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   endDate: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model('Committee', CommitteeSchema);
