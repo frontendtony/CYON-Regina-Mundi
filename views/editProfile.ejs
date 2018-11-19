@@ -3,141 +3,209 @@
 <link rel="stylesheet" type="text/css" href='/stylesheets/member.css'>
 
 <div class="ui container segment">
-    <form class='ui small form' action="/members/<%= currentUser._id %>/edit?_method=PUT" method="POST">
-      <div class="ui medium list">
-        <div class="item">
-          <h3 class="ui medium dividing header">Personal Information</h3>
-          <div class="ui two column stackable grid">
-            <div class="column header">First name:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" id='firstname' name="user[firstname]" placeholder="First name" value="<%= member.firstname %>"/>
-            </div>
-          </div>
+  <form
+    class='ui small form'
+    action="/members/<%= currentUser._id %>/edit?_method=PUT"
+    method="POST">
+    <div class="ui medium list">
+      <div class="item">
+        <h3 class="ui medium dividing header">Personal Information</h3>
+        <div class="ui two column stackable grid">
+        <div class="column header">First name:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            name="user[firstname]"
+            placeholder="First name"
+            value="<%= member.firstname %>"
+          />
         </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Middle name:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" id='middlename' name="user[middlename]" placeholder="Middle name" value="<%= member.middlename %>" />
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Last name:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" id='lastname' name="user[lastname]" placeholder="Last name" value="<%= member.lastname %>"/>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Date Of Birth:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="date" id='date' name="user[dateOfBirth]" value="<%= member.birthday %>"/>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Occupation:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" id='occupation' name="user[occupation]" placeholder="Occupation" value="<%= member.occupation %>"/>
-            </div>
-          </div>
-        </div>
-        
-       <div class="item">
-          <h3 class="ui medium dividing header">Contact</h3>
-          <div class="ui two column stackable grid">
-            <div class="column header">Email:</div>
-            <div class="column capitalize ui transparent input">
-              <input type="email" placeholder='Email' id='email' name='user[email]' value="<%= member.email %>" disabled/>
-            </div>
-          </div>
-        </div>
-        
-       <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Phone1:</div>
-            <div class="column capitalize">
-              <input type="text" placeholder='Phone Number' id='phone' name='user[phone]' value="<%= member.phone %>" />
-            </div>
-          </div>
-        </div>
-        
-       <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Phone2:</div>
-            <div class="column capitalize">
-              <input type="text" placeholder='Second Phone' id='phone2' name='user[phone2]' value="<%= member.phone2 %>" />
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Residential Address:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" placeholder='Lagos Address' id='address' name='user[address]' value="<%= member.address %>" />
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">Home Address:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" placeholder='Village Address' id='address2' name='user[address2]' value="<%= member.address2 %>" />
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">State of Origin:</div>
-            <div class="column capitalize">
-              <select class='ui fluid search dropdown' id='state' name='user[state]' />
-                <% var states = ['abia','adamawa','akwa-ibom','anambra','bauchi','bayelsa','benue','borno','cross-river','delta','ebonyi','edo','ekiti','enugu','gombe','imo','jigawa','kaduna','kano','katsina','kebbi','kogi','kwara','lagos','nasarawa','niger','ogun','ondo','osun','oyo','plateau','rivers','sokoto','taraba','yobe','zamfara'] %>
-                <% for(let i=0; i<states.length; i++){ %>
-                  <% if(!(states[i] === member.state)){ %>
-                    <option value=<%= states[i] %>><%= states[i] %></option>
-                  <% } else { %>
-                    <option value=<%= states[i] %> selected><%= states[i] %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">City/Town:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" placeholder='City/Town' id='city' name='user[city]' value="<%= member.city %>" />
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui two column stackable grid">
-            <div class="column header">L.G.A:</div>
-            <div class="column capitalize">
-              <input class='capitalize' type="text" placeholder='Local Government of Origin' id='lga' name='user[localGovernmentOfOrigin]' value="<%= member.localGovernmentOfOrigin %>" />
-            </div>
-          </div>
-        </div>
-        
       </div>
-      
-      <input class="ui primary button" type="submit" value="Save">
-      <button class="ui button" type="button" value="Update Details"><a href="/members/<%=currentUser.id%>">Cancel</a></button>
-    </form>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Middle name:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            name="user[middlename]"
+            placeholder="Middle name"
+            value="<%= member.middlename %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Last name:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            name="user[lastname]"
+            placeholder="Last name"
+            value="<%= member.lastname %>"
+          />
+        </div>
+        </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Date Of Birth:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="date"
+            name="user[dateOfBirth]"
+            value="<%= member.birthday %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Occupation:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            name="user[occupation]"
+            placeholder="Occupation"
+            value="<%= member.occupation %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+     <div class="item">
+      <h3 class="ui medium dividing header">Contact</h3>
+      <div class="ui two column stackable grid">
+        <div class="column header">Email:</div>
+        <div class="column capitalize ui transparent input">
+          <input
+            type="email"
+            placeholder='Email'
+            name='user[email]'
+            value="<%= member.email %>"
+            disabled
+          />
+        </div>
+      </div>
+    </div>
+    
+     <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Phone1:</div>
+        <div class="column capitalize">
+          <input
+            type="text"
+            placeholder='Phone Number'
+            name='user[phone]'
+            value="<%= member.phone %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+     <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Phone2:</div>
+        <div class="column capitalize">
+          <input
+            type="text"
+            placeholder='Second Phone'
+            name='user[phone2]'
+            value="<%= member.phone2 %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Residential Address:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            placeholder='Lagos Address'
+            name='user[address]'
+            value="<%= member.address %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Home Address:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            placeholder='Village Address'
+            name='user[address2]'
+            value="<%= member.address2 %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">State of Origin:</div>
+        <div class="column capitalize">
+          <select class='ui fluid search dropdown' name='user[state]'>
+          <% states.forEach((state) => { %>
+            <% const selected = state === member.state? 'selected' : ''; %>
+            <option value='<%= state %>' <%= selected %>><%= state %></option>
+          <% }) %>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">City/Town:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            placeholder='City/Town'
+            name='user[city]'
+            value="<%= member.city %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">L.G.A:</div>
+        <div class="column capitalize">
+          <input
+            class='capitalize'
+            type="text"
+            placeholder='Local Government of Origin'
+            name='user[localGovernmentOfOrigin]'
+            value="<%= member.localGovernmentOfOrigin %>"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <input class="ui primary button" type="submit" value="Save">
+    <button class="ui button" type="button" value="Update Details">
+      <a href="/members/<%=currentUser.id%>">Cancel</a>
+    </button>
+  </form>
 </div>
 
 <% include ./partials/footer %>

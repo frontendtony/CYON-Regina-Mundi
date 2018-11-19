@@ -9,7 +9,11 @@
     <p class="capitalize"><%= title %></p>
   </div>
   <a href="/committees" class="ui teal button">Cancel</a>
-  <form class="inline form" action="/committees/<%= _id %>?_method=DELETE" method="POST">
+  <form
+    class="inline form"
+    action="/committees/<%= _id %>?_method=DELETE"
+    method="POST"
+  >
     <input type="submit" class="ui negative button" value="Delete">
   </form>
 </div>

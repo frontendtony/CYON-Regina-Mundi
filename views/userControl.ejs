@@ -9,249 +9,29 @@
   <div class="ui bottom attached active tab segment" data-tab='first'>
     <form class='ui form'>
       <div class="ui big list">
+      <% positions.forEach((position) => { %>
+        <% const pos = position.toLowerCase() %>
         <div class="item">
           <div class="ui three column stackable grid">
-            <div class="six wide column header">President:</div>
+            <div class="six wide column header"><%= position %>:</div>
             <div class="five wide column capitalize">
-              <select name='president' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'president'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
+              <select name='<%= pos %>' class='ui small selection dropdown'>
+                <% members.forEach((m) => { %>
+                  <% const { _id, firstname, lastname, currentPosition } = m %>
+                  <% const selected = currentPosition === pos
+                    ? 'selected' : ''; %>
+                  <option <%= selected %> value='<%= _id %>'>
+                    <%= `${firstname} ${lastname}` %>
+                  </option>
+                <% }) %>
               </select>
             </div>
           </div>
         </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Vice President:</div>
-            <div class="five wide column capitalize">
-              <select name='vice president' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'vice president'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Secretary:</div>
-            <div class="five wide column capitalize">
-              <select name='secretary' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'secretary'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Assistant Secretary:</div>
-            <div class="five wide column capitalize">
-              <select name='assistant secretary' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'assistant secretary'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Financial Secretary:</div>
-            <div class="five wide column capitalize">
-              <select name='financial secretary' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'financial secretary'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">PRO 1:</div>
-            <div class="five wide column capitalize">
-              <select name='pro 1' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'pro 1'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">PRO 2:</div>
-            <div class="five wide column capitalize">
-              <select name='pro 2' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'pro 2'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">DOS 1:</div>
-            <div class="five wide column capitalize">
-              <select name='dos 1' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'dos 1'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">DOS 2:</div>
-            <div class="five wide column capitalize">
-              <select name='dos 2' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'dos 2'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Welfare 1:</div>
-            <div class="five wide column capitalize">
-              <select name='welfare 1' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'welfare 1'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Welfare 2:</div>
-            <div class="five wide column capitalize">
-              <select name='walfare 2' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'walfare 2'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Provost 1:</div>
-            <div class="five wide column capitalize">
-              <select name='provost 1' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'provost 1'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Provost 2:</div>
-            <div class="five wide column capitalize">
-              <select name='provost 2' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'provost 2'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ui three column stackable grid">
-            <div class="six wide column header">Queen:</div>
-            <div class="five wide column capitalize">
-              <select name='queen' class='ui small selection dropdown'>
-                <% for(let member of members){ %>
-                  <% if(member.currentPosition === 'queen'){ %>
-                    <option selected value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } else { %>
-                    <option value='<%= member._id %>'><%= member.firstname %> <%= member.lastname %></option>
-                  <% } %>
-                <% } %>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        
+      <% }) %>
       </div>
     </form>
   </div>
 </section>
-
 
 <script src='/js/userControl.js'></script>

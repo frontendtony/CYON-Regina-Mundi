@@ -1,58 +1,64 @@
 <% include ./partials/header %>
 <link rel="stylesheet" type="text/css" href='/stylesheets/member.css'>
 
-<img class="ui centered rounded large bodered image" src="<%= member.image || 'https://via.placeholder.com/400?text=image unavailable' %>" alt="<%= member.firstname +' '+ member.lastname %>">
+<% const { firstname, lastname, image, phone, email, birthday,
+  state, currentPosition, occupation, relationshipStatus } = member %>
+<img
+  class="ui centered rounded large bodered image"
+  src="<%= image || 'https://via.placeholder.com/400?text=image%20unavailable'%>"
+  alt="<%= `${firstname} ${lastname}` %>"
+>
 <div class='ui raised piled very padded segment text container'>
-    <div class="ui big list">
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Name:</div>
-                <div class="column capitalize"><%= member.firstname +" "+ member.lastname %></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Position:</div>
-                <div class="column capitalize"><%= member.currentPosition %></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Phone:</div>
-                <div class="column"><%= member.phone %></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Email:</div>
-                <div class="column"><%= member.email %></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Relationship Status:</div>
-                <div class="column capitalize"><%= member.relationshipStatus %></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Birthday:</div>
-                <div class="column"><%= member.birthday %></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">State Of Origin:</div>
-                <div class="column capitalize"><%= member.state %></div>
-            </div>
-        </div>
-        
-        <div class="item">
-            <div class="ui two column stackable grid">
-                <div class="column header">Occupation:</div>
-                <div class="column capitalize"><%= member.occupation %></div>
-            </div>
-        </div>
-        
+  <div class="ui big list">
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Name:</div>
+        <div class="column capitalize"><%= firstname +" "+ lastname %></div>
+      </div>
     </div>
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Position:</div>
+        <div class="column capitalize"><%= currentPosition %></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Phone:</div>
+        <div class="column"><%= phone %></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Email:</div>
+        <div class="column"><%= email %></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Relationship Status:</div>
+        <div class="column capitalize"><%= relationshipStatus %></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Birthday:</div>
+        <div class="column"><%= birthday %></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">State Of Origin:</div>
+        <div class="column capitalize"><%= state %></div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui two column stackable grid">
+        <div class="column header">Occupation:</div>
+        <div class="column capitalize"><%= occupation %></div>
+      </div>
+    </div>
+    
+  </div>
 </div>

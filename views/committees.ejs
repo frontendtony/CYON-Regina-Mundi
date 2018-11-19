@@ -3,73 +3,74 @@
 <div class="ui padded container segment">
   <div class="ui big vertical list">
   <% committees.forEach((committee) => { %>
-    <% const { _id, title, purpose, startDate, chairman, members } = committee %>
+    <% const {_id, title, purpose, startDate, chairman, members} = committee %>
     <li class="item capitalize">
       <div class="content">
-        <h3 class="header committee-name"><%= title %></h3>
-        <div class="ui small segment">
-          <div class="ui list">
-          <div class="item committee-property">
-            <div class="ui two column stackable grid">
-              <div class="three wide column header property-name">Purpose:</div>
-              <div class="thirteen wide column property-value cap-first-letter">
-                <%= purpose %>
-              </div>
-            </div>
-          </div>
-          <div class="item committee-property">
-            <div class="ui two column stackable grid">
-              <div class="three wide column header property-name">Start Date:</div>
-              <div class="thirteen wide column property-value">
-                <%= moment(startDate).format("MMMM Do, YYYY") %>
-              </div>
-            </div>
-          </div>
-          <div class="item committee-property">
-            <div class="ui two column stackable grid">
-              <div class="three wide column header property-name">Chairman:</div>
-              <div class="thirteen wide column property-value">
-                <a href="/members/<%= chairman._id %>">
-                  <%= chairman.firstname %> <%= chairman.lastname %>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="item committee-property">
-            <div class="ui two column stackable grid">
-              <div class="three wide column header property-name">Members:</div>
-              <div class="thirteen wide column property-value">
-                <% members.forEach((member) => { %>
-                  <a href="/members/<%= member._id %>">
-                    <%= member.firstname %> <%= member.lastname %>
-                  </a><br>
-                <% }) %>
-              </div>
-            </div>
+      <h3 class="header committee-name"><%= title %></h3>
+      <div class="ui small segment">
+        <div class="ui list">
+        <div class="item committee-property">
+        <div class="ui two column stackable grid">
+          <div class="three wide column header property-name">Purpose:</div>
+          <div class="thirteen wide column property-value cap-first-letter">
+          <%= purpose %>
           </div>
         </div>
-        <% if(currentUser && currentUser.isAdmin){ %>
-          <a class="ui teal labeled icon basic button"
-            href="/committees/<%= _id %>/edit"
-          >
-            <i class="edit icon"></i>
-            Edit
+        </div>
+        <div class="item committee-property">
+        <div class="ui two column stackable grid">
+          <div class="three wide column header property-name">Start Date:</div>
+          <div class="thirteen wide column property-value">
+          <%= moment(startDate).format("MMMM Do, YYYY") %>
+          </div>
+        </div>
+        </div>
+        <div class="item committee-property">
+        <div class="ui two column stackable grid">
+          <div class="three wide column header property-name">Chairman:</div>
+          <div class="thirteen wide column property-value">
+          <a href="/members/<%= chairman._id %>">
+            <%= chairman.firstname %> <%= chairman.lastname %>
           </a>
-          <a class="ui negative right labeled icon basic button" 
-            href="/committees/<%= _id %>/delete"
-          >
-            <i class="trash icon"></i>
-            Delete
-          </a>
-        <% } %>
+          </div>
+        </div>
+        </div>
+        <div class="item committee-property">
+        <div class="ui two column stackable grid">
+          <div class="three wide column header property-name">Members:</div>
+          <div class="thirteen wide column property-value">
+          <% members.forEach((member) => { %>
+            <a href="/members/<%= member._id %>">
+            <%= member.firstname %> <%= member.lastname %>
+            </a><br>
+          <% }) %>
+          </div>
+        </div>
+        </div>
+      </div>
+      <% if(currentUser && currentUser.isAdmin){ %>
+        <a class="ui teal labeled icon basic button"
+        href="/committees/<%= _id %>/edit"
+        >
+        <i class="edit icon"></i>
+        Edit
+        </a>
+        <a class="ui negative right labeled icon basic button" 
+        href="/committees/<%= _id %>/delete"
+        >
+        <i class="trash icon"></i>
+        Delete
+        </a>
+      <% } %>
       </div>
     </li>
   <% }) %>
   </div>
+
   <% if(currentUser && currentUser.isAdmin){ %>
-    <a class="circular ui icon teal massive button" href="/committees/new">
-      <i class="plus icon"></i>
-    </a>
+  <a class="circular ui icon teal massive button" href="/committees/new">
+    <i class="plus icon"></i>
+  </a>
   <% } %>
   
 </div>

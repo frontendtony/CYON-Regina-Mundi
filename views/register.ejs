@@ -1,112 +1,180 @@
 <% include ./partials/header %>
 
 <div class="login register">
-    <div class="ui raised segment">
-        <form id="signUpForm" class="ui form register" action="/register" method="POST">
-            <h2 class="form-title">Create Account</h2>
-            <h3 class="ui dividing header">Personal Information</h3>
-            <div class='three fields'>
-                <div class='field'>
-                    <label>First name</label>
-                    <input type="text" id='firstname' name="newUser[firstname]" placeholder="First name" />
-                </div>
-                <div class='field'>
-                    <label>Middle name</label>
-                    <input type="text" id='middlename' name="newUser[middlename]" placeholder="Middle name" />
-                </div>
-                <div class='field'>
-                    <label>Last name</label>
-                    <input type="text" id='lastname' name="newUser[lastname]" placeholder="Last name" />
-                </div>
-            </div>
-            <div class="fields">
-                <div class='three wide field'>
-                    <label>Gender</label>
-                    <select class='ui fluid dropdown' id='gender' name='newUser[gender]' />
-                        <option value=''>Select</option>
-                        <option value='male'>Male</option>
-                        <option value='female'>Female</option>
-                    </select>
-                </div>
-                <div class='three wide field'>
-                    <label>Marital Status</label>
-                    <select class='ui fluid dropdown' id='relationshipStatus' name='newUser[relationshipStatus]' >
-                        <option value=''>Select</option>
-                        <option value='single'>Single</option>
-                        <option value='married'>Married</option>
-                    </select>
-                </div>
-                
-                <div class='four wide field'>
-                    <label>Date of birth</label>
-                    <input type="date" id='date' name='newUser[dateOfBirth]' />
-                </div>
-                
-                <div class='six wide field'>
-                    <label>Occupation</label>
-                    <input type="text" id='occupation' name='newUser[occupation]' />
-                </div>
-                
-            </div>
-            <h3 class='ui dividing header'>Contact</h3>
-            <div class='three fields'>
-                <div class='field'>
-                    <label>Email</label>
-                    <input type="email" placeholder='Email' id='email' name='username' />
-                </div>
-                <div class='field'>
-                    <label>Phone1</label>
-                    <input type="text" placeholder='Phone Number' id='phone' name='newUser[phone]' />
-                </div>
-                <div class='field'>
-                    <label>Phone2</label>
-                    <input type="text" placeholder='Second Phone' id='phone2' name='newUser[phone2]'>
-                </div>
-            </div>
-            <div class='field'>
-                <label>Residential Address</label>
-                <input type="text" placeholder='Lagos Address' id='address' name='newUser[address]' />
-            </div>
-            <div class='field'>
-                <label>Home Address</label>
-                <input type="text" placeholder='Village Address' id='address2' name='newUser[address2]'>
-            </div>
-            <div class='three fields'>
-                <div class='field'>
-                    <label>State of Origin</label>
-                    <select class='ui fluid search dropdown' id='state' name='newUser[state]' />
-                        <% var states = ['abia','adamawa','akwa-ibom','anambra','bauchi','bayelsa','benue','borno','cross-river','delta','ebonyi','edo','ekiti','enugu','gombe','imo','jigawa','kaduna','kano','katsina','kebbi','kogi','kwara','lagos','nasarawa','niger','ogun','ondo','osun','oyo','plateau','rivers','sokoto','taraba','yobe','zamfara'] %>
-                        <% for(let i=0; i<states.length; i++){ %>
-                          <option class='capitalize' value=<%= states[i] %> selected><%= states[i][0].toUpperCase() + states[i].substring(1); %></option>
-                        <% } %>
-                        <option value='' selected>State</option>
-                    </select>
-                </div>
-                <div class='field'>
-                    <label>City/Town</label>
-                    <input type="text" placeholder='City/Town' id='city' name='newUser[city]'>
-                </div>
-                <div class='field'>
-                    <label>L.G.A</label>
-                    <input type="text" placeholder='Local Government of Origin' id='lga' name='newUser[localGovernmentOfOrigin]'>
-                </div>
-                
-            </div>
-            <h3 class='ui dividing header'>Create Password</h3>
-            <div class='two fields'>
-                <div class='field'>
-                    <label>Password</label>
-                    <input type="password" placeholder='Password' id='password' name='password' />
-                </div>
-                <div class='field'>
-                    <label>Re-type password</label>
-                    <input type="password" placeholder='Re-type password' id='confirmPassword' />
-                </div>
-            </div>
-            <input class="ui button login" type="submit" value="Register">
-            <div class="ui error message"></div>
-        </form>
-    </div>
+  <div class="ui raised segment">
+    <form 
+      id="signUpForm"
+      class="ui form register"
+      action="/register" method="POST">
+      <h2 class="form-title">Create Account</h2>
+      <h3 class="ui dividing header">Personal Information</h3>
+      <div class='three fields'>
+        <div class='field'>
+          <label>First name</label>
+          <input
+            type="text"
+            id='firstname'
+            name="newUser[firstname]"
+            placeholder="John"
+          />
+        </div>
+        <div class='field'>
+          <label>Middle name</label>
+          <input
+            type="text"
+            id='middlename'
+            name="newUser[middlename]"
+            placeholder="Chukwudi"
+          />
+        </div>
+        <div class='field'>
+          <label>Last name</label>
+          <input
+            type="text"
+            id='lastname'
+            name="newUser[lastname]"
+            placeholder="Okoro"
+          />
+        </div>
+      </div>
+      <div class="fields">
+        <div class='three wide field'>
+          <label>Gender</label>
+          <select
+            class='ui fluid dropdown'
+            id='gender' name='newUser[gender]'
+          />
+            <option value=''>Select</option>
+            <option value='male'>Male</option>
+            <option value='female'>Female</option>
+          </select>
+        </div>
+        <div class='three wide field'>
+          <label>Marital Status</label>
+          <select
+            class='ui fluid dropdown'
+            id='relationshipStatus'
+            name='newUser[relationshipStatus]'>
+            <option value=''>Select</option>
+            <option value='single'>Single</option>
+            <option value='married'>Married</option>
+          </select>
+        </div>
+        
+        <div class='four wide field'>
+          <label>Date of birth</label>
+          <input type="date" id='date' name='newUser[dateOfBirth]' />
+        </div>
+        
+        <div class='six wide field'>
+          <label>Occupation</label>
+          <input type="text" id='occupation' name='newUser[occupation]' />
+        </div>
+        
+      </div>
+      <h3 class='ui dividing header'>Contact</h3>
+      <div class='three fields'>
+        <div class='field'>
+          <label>Email</label>
+          <input type="email" placeholder='Email' id='email' name='username' />
+        </div>
+        <div class='field'>
+          <label>Phone1</label>
+          <input
+            type="text"
+            placeholder='08012345678'
+            id='phone'
+            name='newUser[phone]'
+          />
+        </div>
+        <div class='field'>
+          <label>Phone2</label>
+          <input
+            type="text"
+            placeholder='08012345678'
+            id='phone2'
+            name='newUser[phone2]'
+          />
+        </div>
+      </div>
+      <div class='field'>
+        <label>Residential Address</label>
+        <input
+          type="text"
+          placeholder='Lagos Address'
+          id='address' name='newUser[address]'
+        />
+      </div>
+      <div class='field'>
+        <label>Home Address</label>
+        <input
+          type="text"
+          placeholder='Village Address'
+          id='address2'
+          name='newUser[address2]'
+        />
+      </div>
+      <div class='three fields'>
+        <div class='field'>
+          <label>State of Origin</label>
+          <select
+            class='ui fluid search dropdown'
+            id='state'
+            name='newUser[state]' />
+            <option value='' selected>State</option>
+            <% states.forEach((state) => { %>
+              <option value='<%= state %>'>
+                <%= state[0].toUpperCase() + state.substring(1)%>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+        <div class='field'>
+          <label>City/Town</label>
+          <input
+            type="text"
+            placeholder='City/Town'
+            id='city' name='newUser[city]'
+          />
+        </div>
+        <div class='field'>
+          <label>L.G.A</label>
+          <input
+            type="text"
+            placeholder='Local Government of Origin' id='lga'
+            name='newUser[localGovernmentOfOrigin]'
+          />
+        </div>
+        
+      </div>
+      <h3 class='ui dividing header'>Create Password</h3>
+      <div class='two fields'>
+        <div class='field'>
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder='Password' id='password' name='password'
+          />
+        </div>
+        <div class='field'>
+          <label>Re-type password</label>
+          <input
+            type="password"
+            placeholder='Re-type password'
+            id='confirmPassword'
+          />
+        </div>
+      </div>
+      <input class="ui button login" type="submit" value="Register">
+      <p>
+        Already have an account? 
+        <a class='white text' href='/login'>
+          Login
+        </a>
+      </p>
+      <div class="ui error message"></div>
+    </form>
+  </div>
 </div>
 
 <script src='/js/register.js'></script>
