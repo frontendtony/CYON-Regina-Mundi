@@ -6,6 +6,7 @@ const cloudinary = require('cloudinary');
 const multer = require('multer');
 const { isLoggedIn, verifyAccountOwnership } = require('../middleware');
 const User = require('../models/user');
+const states = require('../models/states');
 
 const router = express.Router();
 
@@ -36,7 +37,7 @@ router.get('/register', (req, res) => {
     req.flash('error', 'You are already logged in');
     return res.redirect('/');
   }
-  return res.render('register');
+  return res.render('register', { states });
 });
 
 router.post('/register', async (req, res) => {
@@ -120,7 +121,10 @@ router.get('/members/:id/edit', isLoggedIn, verifyAccountOwnership,
       return res.redirect('/members');
     }
     member.birthday = moment(member.dateOfBirth).format('YYYY-MM-DD');
-    return res.render('editProfile', { member });
+    return res.render('editProfile', {
+      member,
+      states,
+    });
   });
 
 router.put('/members/:id/edit', isLoggedIn, verifyAccountOwnership,
