@@ -164,12 +164,18 @@ router.post('/reset/:token', (req, res) => {
 
 
 router.get('/userControl', isLoggedIn, isAdmin, (req, res) => {
+  const positions = [ 'President', 'Vice President', 'Secretary',
+    'Assistant Secretary', 'Financial Secretary', 'PR0 1', 'PR0 2', 'DOS 1',
+    'DOS 2', 'Welfare 1', 'Welfare 2', 'Provost 1', 'Provost 2', 'Queen']
   User.find({}, 'firstname lastname currentPosition', (err, users) => {
     if (err) {
       req.flash('error', 'Sever error, please contact the admin');
       return res.redirect('/');
     }
-    return res.render('userControl', { members: users });
+    return res.render('userControl', {
+      members: users,
+      positions,
+    });
   });
 });
 
