@@ -2,8 +2,8 @@
 
 const close = $('.close.icon');
 
-close.on('click', (event) => {
-    close.parent().remove();
+close.on('click', () => {
+  close.parent().remove();
 });
 
 $('select.dropdown')
