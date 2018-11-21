@@ -5,7 +5,6 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const User = require('../models/user');
 const { isLoggedIn, isAdmin } = require('../middleware');
-require('dotenv').config();
 
 const router = express.Router();
 

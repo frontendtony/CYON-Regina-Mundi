@@ -13,7 +13,6 @@ const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 const apiRoute = require('./routes/apis');
 const committeesRoute = require('./routes/committee');
-require('dotenv').config();
 
 mongoose.connect(process.env.CYONDB);
 
