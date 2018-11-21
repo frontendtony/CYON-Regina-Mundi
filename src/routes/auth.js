@@ -43,7 +43,7 @@ router.post('/auth/signup', async (req, res) => {
     const user = await User.register(newUser, password);
     passport.authenticate('local')(req, res, () => {
       const id = user._id;
-      return res.redirect(`/uploadImage/${id}`);
+      return res.redirect(`/members/${id}/imageupload`);
     });
   } catch (error) {
     if (error.name === 'UserExistsError') {

@@ -107,12 +107,13 @@ router.put('/members/:id/edit', isLoggedIn, verifyAccountOwnership,
     return res.redirect(`/members/${req.params.id}`);
   });
 
-router.get('/uploadImage/:id', isLoggedIn, (req, res) => {
+router.get('/members/:id/imageupload', isLoggedIn, (req, res) => {
   const { id } = req.params;
   return res.render('imageUpload', { userId: id });
 });
 
-router.post('/uploadImage/:id', verifyAccountOwnership, upload.single('image'),
+router.post('/members/:id/imageupload',
+  verifyAccountOwnership, upload.single('image'),
   async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
@@ -126,10 +127,11 @@ router.post('/uploadImage/:id', verifyAccountOwnership, upload.single('image'),
         user.image = result.secure_url;
         user.imageId = result.public_id;
         user.save();
+        req.flash('success', 'Profile picture updated successfully');
         return res.redirect(`/members/${user._id}`);
       } catch (error) {
         req.flash('error', error);
-        return res.redirect(`/uploadImage/${req.params.id}`);
+        return res.redirect(`/members/${req.params.id}/imageupload`);
       }
     } catch (error) {
       req.flash('error', error.message);
