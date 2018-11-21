@@ -62,6 +62,10 @@ router.get('/members', isLoggedIn, async (req, res) => {
   });
 });
 
+router.get('/members/birthdays', isLoggedIn, (req, res) => {
+  res.render('birthdays');
+});
+
 router.get('/members/:id', isLoggedIn, async (req, res) => {
   let member;
   try {

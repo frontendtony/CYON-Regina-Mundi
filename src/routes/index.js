@@ -24,8 +24,4 @@ router.get('/userControl', isLoggedIn, isAdmin, (req, res) => {
   });
 });
 
-router.get('/birthdays', isLoggedIn, (req, res) => {
-  res.render('birthdays');
-});
-
 export default router;
