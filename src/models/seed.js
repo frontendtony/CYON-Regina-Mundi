@@ -1,5 +1,5 @@
-const faker = require('faker');
-const User = require('./user');
+import faker from 'faker';
+import User from './user';
 
 const execs = [
   { currentPosition: 'president' },
@@ -49,4 +49,4 @@ function seedDB() {
   } while (num < 20);
 }
 
-module.exports = seedDB;
+export default seedDB;

@@ -1,4 +1,4 @@
-module.exports = ['abia','adamawa','akwa-ibom','anambra','bauchi',
+export default ['abia','adamawa','akwa-ibom','anambra','bauchi',
   'bayelsa','benue','borno','cross-river','delta','ebonyi','edo',
   'ekiti','enugu','gombe','imo','jigawa','kaduna','kano','katsina',
   'kebbi','kogi','kwara','lagos','nasarawa','niger','ogun','ondo',

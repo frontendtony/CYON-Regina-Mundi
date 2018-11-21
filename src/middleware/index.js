@@ -1,9 +1,7 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-const User = require('../models/user');
+import User from '../models/user';
 
-const middlewareObject = {};
-
-middlewareObject.isLoggedIn = (req, res, next) => {
+export const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
@@ -11,7 +9,7 @@ middlewareObject.isLoggedIn = (req, res, next) => {
   return res.render('login', { source: req.path, title: 'Login' });
 };
 
-middlewareObject.verifyAccountOwnership = async (req, res, next) => {
+export const verifyAccountOwnership = async (req, res, next) => {
   const { id } = req.params;
   let user;
   try {
@@ -28,7 +26,7 @@ middlewareObject.verifyAccountOwnership = async (req, res, next) => {
 };
 
 
-middlewareObject.isAdmin = async (req, res, next) => {
+export const isAdmin = async (req, res, next) => {
   let user;
   try {
     user = await User.findById(req.user._id);
@@ -42,6 +40,3 @@ middlewareObject.isAdmin = async (req, res, next) => {
   }
   return next();
 };
-
-
-module.exports = middlewareObject;

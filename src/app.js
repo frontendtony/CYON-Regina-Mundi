@@ -1,18 +1,20 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import flash from 'connect-flash';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import session from 'express-session';
+import ConnectMongo from 'connect-mongo';
+import passport from 'passport';
+import methodOverride from 'method-override';
+import User from './models/user';
+import indexRoute from './routes/index';
+import userRoute from './routes/user';
+import apiRoute from './routes/apis';
+import committeesRoute from './routes/committee';
+
+const MongoStore = ConnectMongo(session);
 const app = express();
-const flash = require('connect-flash');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const passport = require('passport');
-const methodOverride = require('method-override');
-const User = require('./models/user');
-const indexRoute = require('./routes/index');
-const userRoute = require('./routes/user');
-const apiRoute = require('./routes/apis');
-const committeesRoute = require('./routes/committee');
 
 mongoose.connect(process.env.CYONDB);
 
@@ -25,10 +27,10 @@ app.use(flash());
 
 //PASSPORT CONFIGURATION
 app.use(session({
-    secret: process.env.PASSPORT_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({mongooseConnection: mongoose.connection})
+  secret: process.env.PASSPORT_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 
 app.use(passport.initialize());
@@ -38,10 +40,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
-    res.locals.error = req.flash('error');
-    res.locals.success = req.flash('success');
-    next();
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+  next();
 })
 
 app.use(indexRoute);
@@ -49,6 +51,6 @@ app.use(userRoute);
 app.use(apiRoute);
 app.use(committeesRoute);
 
-app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', function() {
-    console.log("CYON App Started")
+app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', () => {
+  console.log("CYON App Started")
 })

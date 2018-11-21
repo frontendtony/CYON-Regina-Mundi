@@ -1,10 +1,10 @@
-const express = require('express');
-const passport = require('passport');
-const async = require('async');
-const nodemailer = require('nodemailer');
-const crypto = require('crypto');
-const User = require('../models/user');
-const { isLoggedIn, isAdmin } = require('../middleware');
+import express from 'express';
+import passport from 'passport';
+import async from 'async';
+import nodemailer from 'nodemailer';
+import crypto from 'crypto';
+import User from '../models/user';
+import { isLoggedIn, isAdmin } from '../middleware';
 
 const router = express.Router();
 
@@ -184,4 +184,4 @@ router.get('/birthdays', isLoggedIn, (req, res) => {
 });
 
 
-module.exports = router;
+export default router;

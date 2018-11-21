@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const CommitteeSchema = new mongoose.Schema({
   title: {
@@ -39,4 +39,4 @@ const CommitteeSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Committee', CommitteeSchema);
+export default mongoose.model('Committee', CommitteeSchema);

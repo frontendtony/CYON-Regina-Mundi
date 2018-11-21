@@ -1,9 +1,8 @@
-const express = require('express');
-const moment = require('moment');
-const User = require('../models/user');
+import express from 'express';
+import moment from 'moment';
+import User from '../models/user';
 
 const router = express.Router();
-
 
 router.get('/apis/birthdays/:month', async (req, res) => {
   try {
@@ -37,4 +36,4 @@ router.get('/apis/updatePosition/:id/:position', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

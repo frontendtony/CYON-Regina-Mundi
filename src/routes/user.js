@@ -1,12 +1,12 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id", "_doc"] }] */
-const express = require('express');
-const passport = require('passport');
-const moment = require('moment');
-const cloudinary = require('cloudinary');
-const multer = require('multer');
-const { isLoggedIn, verifyAccountOwnership } = require('../middleware');
-const User = require('../models/user');
-const states = require('../models/states');
+import express from 'express';
+import passport from 'passport';
+import moment from 'moment';
+import cloudinary from 'cloudinary';
+import multer from 'multer';
+import { isLoggedIn, verifyAccountOwnership } from '../middleware';
+import User from '../models/user';
+import states from '../models/states';
 
 const router = express.Router();
 
@@ -168,4 +168,4 @@ router.post('/uploadImage/:id', verifyAccountOwnership, upload.single('image'),
     }
   });
 
-module.exports = router;
+export default router;

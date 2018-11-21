@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
+import moment from 'moment';
+import { isLoggedIn, isAdmin } from '../middleware';
+import User from '../models/user';
+import Committee from '../models/committee';
 
 const router = express.Router();
-const moment = require('moment');
-const { isLoggedIn, isAdmin } = require('../middleware');
-const User = require('../models/user');
-const Committee = require('../models/committee');
 
 router.post('/committees', isLoggedIn, isAdmin, (req, res) => {
   const {
@@ -99,4 +99,4 @@ router.delete('/committees/:id/', isLoggedIn, isAdmin, async (req, res) => {
   return res.redirect('/committees');
 });
 
-module.exports = router;
+export default router;
