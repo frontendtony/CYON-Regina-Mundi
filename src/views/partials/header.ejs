@@ -63,10 +63,10 @@
         <ul class="navbar-nav ml-auto">
           <% if(!currentUser){ %>
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/auth/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/register">Sign Up</a>
+              <a class="nav-link" href="/auth/signup">Sign Up</a>
             </li>
           <% } else { %>
             <% const { _id, firstname, image} = currentUser %>
@@ -86,7 +86,7 @@
                 <a class="dropdown-item" href="/members/<%= _id %>">View Profile</a>
                 <a class="dropdown-item" href="/members/<%= _id %>/edit">Edit Profile</a>
                 <a class="dropdown-item" href="/uploadImage/<%= _id %>">Upload Profile Picture</a>
-                <a class="dropdown-item" href="/logout">Logout</a>
+                <a class="dropdown-item" href="/auth/logout">Logout</a>
               </div>
             </li>
           <% } %>

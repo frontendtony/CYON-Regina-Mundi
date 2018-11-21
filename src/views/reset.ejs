@@ -1,7 +1,7 @@
 <% include ./partials/header %>
 <div class="login register">
   <div class="ui raised segment">
-    <form class="ui form login" action="/reset/<%= token %>" method="POST">
+    <form class="ui form login" action="/auth/passwordreset/<%= token %>" method="POST">
       <h2 class="form-title">Create a new password</h2>
       <div class="field">
         <label>Password</label>
@@ -27,6 +27,6 @@
   </div>
 </div>
 
-<script src='js/reset.js'></script>
+<script src='/js/reset.js'></script>
 
 <% include ./partials/footer %>

@@ -1,6 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id", "_doc"] }] */
 import express from 'express';
-import passport from 'passport';
 import moment from 'moment';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
@@ -29,36 +28,6 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-
-router.get('/register', (req, res) => {
-  if (req.user) {
-    req.flash('error', 'You are already logged in');
-    return res.redirect('/');
-  }
-  return res.render('register', { states });
-});
-
-router.post('/register', async (req, res) => {
-  const { newUser, password } = req.body;
-  newUser.email = req.body.username;
-  newUser.username = req.body.username;
-  try {
-    const user = await User.register(newUser, password);
-    passport.authenticate('local')(req, res, () => {
-      const id = user._id;
-      return res.redirect(`/uploadImage/${id}`);
-    });
-  } catch (error) {
-    if (error.name === 'UserExistsError') {
-      req.flash('error', 'A user already exists with the same email');
-    } else {
-      req.flash('error', 'Something went wrong, contact the system admin');
-    }
-    return res.render('register', { title: 'Sign Up', newUser });
-  }
-  return res.render('register', { title: 'Sign Up', newUser });
 });
 
 router.get('/members', isLoggedIn, async (req, res) => {
