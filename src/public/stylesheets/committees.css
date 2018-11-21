@@ -1,0 +1,47 @@
+.container.segment {
+  max-width: 800px !important;
+}
+
+.committee-name {
+  margin-bottom: 15px !important;
+}
+
+.committee-property {
+  margin-bottom: 15px !important;
+}
+
+.big.list > .item {
+  margin-bottom: 30px !important;
+}
+
+.circular.ui.icon.button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.confirm-delete.segment {
+  max-width: 600px !important;
+}
+
+.inline.form {
+  display: inline !important;
+}
+
+@media screen and (max-width: 767px) {
+  .two.column.stackable.grid > .property-name {
+    padding-bottom: 0 !important;
+  }
+
+  .two.column.stackable.grid > .property-value {
+    padding-top: 0 !important;
+  }
+
+  .ui.small.segment {
+    padding-left: 0 !important;
+  }
+
+  .ui.basic.button:first-of-type {
+    margin-left: 21px;
+  }
+}
