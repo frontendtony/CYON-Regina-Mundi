@@ -30,19 +30,25 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const imageTransform = (url) => {
+  const modifiedUrl = !!url
+    ? cloudinary.url(url, {
+      height: 400,
+      width: 400,
+      crop: 'fill',
+      gravity: 'face:center',
+      secure: true,
+    })
+    : 'https://via.placeholder.com/400?text=image_unavailable';
+
+  return modifiedUrl;
+}
+
 router.get('/members', isLoggedIn, async (req, res) => {
   const members = await User.find().exec();
   const users = await members.map((member) => {
     const newObj = member._doc;
-    newObj.image = member.imageId
-      ? cloudinary.url(member.imageId, {
-        height: 400,
-        width: 400,
-        crop: 'fill',
-        gravity: 'face:center',
-        secure: true,
-      })
-      : 'https://via.placeholder.com/400?text=image_unavailable';
+    newObj.image = imageTransform(member.imageId);
     return newObj;
   });
   const president = users.find(m => m.currentPosition === 'president');
@@ -73,13 +79,7 @@ router.get('/members/:id', isLoggedIn, isVerified, async (req, res) => {
   } catch (error) {
     return res.redirect('/members');
   }
-  member.image = cloudinary.url(member.imageId, {
-    height: 400,
-    width: 400,
-    crop: 'fill',
-    gravity: 'face:center',
-    secure: true,
-  });
+  member.image = imageTransform(member.imageId);
   member.birthday = moment(member.dateOfBirth).format('MMMM Do');
   return res.render('member', { member });
 });

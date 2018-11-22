@@ -4,8 +4,7 @@
 <% const { firstname, lastname, image, phone, email, birthday,
   state, currentPosition, occupation, relationshipStatus } = member %>
 <img
-  class="ui centered rounded large bodered image"
-  src="<%= image || 'https://via.placeholder.com/400?text=image%20unavailable'%>"
+  class="ui centered rounded large bodered image" src="<%= image %>"
   alt="<%= `${firstname} ${lastname}` %>"
 >
 <div class='ui raised piled very padded segment text container'>
