@@ -24,4 +24,8 @@ router.get('/userControl', isLoggedIn, isAdmin, (req, res) => {
   });
 });
 
+router.get('/*', (req, res) => {
+  return res.render('notFound');
+})
+
 export default router;

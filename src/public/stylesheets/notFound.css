@@ -1,0 +1,22 @@
+.not-found-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+h1 {
+  background: radial-gradient(circle, rgba(247,247,247,1) 0%, rgba(0,128,128,1) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Russo One', sans-serif;
+  font-size: 12rem;
+  line-height: 1em;
+}
+
+p:first-of-type {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
