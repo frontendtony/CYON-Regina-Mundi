@@ -11,9 +11,8 @@ export const isLoggedIn = (req, res, next) => {
 
 export const verifyAccountOwnership = async (req, res, next) => {
   const { id } = req.params;
-  let user;
   try {
-    user = await User.findById(id);
+    const user = await User.findById(id);
     if (!(user._id.equals(req.user._id))) {
       req.flash('error', 'Access Denied!');
       return res.redirect(`/members/${id}`);
@@ -25,11 +24,23 @@ export const verifyAccountOwnership = async (req, res, next) => {
   return next();
 };
 
+export const isVerified = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user.verified) {
+      req.flash('error','You have to be a verified member to visit that page');
+      return res.redirect('back');
+    }
+  } catch (error) {
+    req.flash('error', 'Something went wrong, contact the system admin');
+    return res.redirect('back');
+  }
+  return next();
+};
 
 export const isAdmin = async (req, res, next) => {
-  let user;
   try {
-    user = await User.findById(req.user._id);
+    const user = await User.findById(req.user._id);
     if (!user.isAdmin) {
       req.flash('error', 'Access Denied!');
       return res.redirect('/');

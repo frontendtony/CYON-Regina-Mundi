@@ -1,6 +1,6 @@
 import express from 'express';
 import moment from 'moment';
-import { isLoggedIn, isAdmin } from '../middleware';
+import { isLoggedIn, isVerified, isAdmin } from '../middleware';
 import User from '../models/user';
 import Committee from '../models/committee';
 

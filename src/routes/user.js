@@ -3,7 +3,7 @@ import express from 'express';
 import moment from 'moment';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
-import { isLoggedIn, verifyAccountOwnership } from '../middleware';
+import { isLoggedIn, isVerified, verifyAccountOwnership } from '../middleware';
 import User from '../models/user';
 import states from '../models/states';
 
@@ -62,11 +62,11 @@ router.get('/members', isLoggedIn, async (req, res) => {
   });
 });
 
-router.get('/members/birthdays', isLoggedIn, (req, res) => {
+router.get('/members/birthdays', isLoggedIn, isVerified, (req, res) => {
   res.render('birthdays');
 });
 
-router.get('/members/:id', isLoggedIn, async (req, res) => {
+router.get('/members/:id', isLoggedIn, isVerified, async (req, res) => {
   let member;
   try {
     member = await User.findById(req.params.id);
