@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
   city: { type: String, lowercase: true },
   localGovernmentOfOrigin: { type: String },
   isAdmin: { type: Boolean, default: false },
+  isSuperAdmin: { type: Boolean, default: false },
   isExecutive: { type: Boolean, default: false },
   currentPosition: { type: String, lowercase: true, default: 'member' },
   verified: { type: Boolean, default: false },
