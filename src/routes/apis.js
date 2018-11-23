@@ -13,7 +13,7 @@ const updateById = async (id, data) => {
   return true;
 }
 
-router.get('/apis/birthdays/:month', async (req, res) => {
+router.get('/api/birthdays/:month', async (req, res) => {
   try {
     const members = await User.find(
       {}, 'firstname lastname gender dateOfBirth email phone',
@@ -28,8 +28,7 @@ router.get('/apis/birthdays/:month', async (req, res) => {
   }
 });
 
-
-router.get('/apis/updatePosition/:id/:position', async (req, res) => {
+router.put('/api/updateposition/:id/:position', async (req, res) => {
   try {
     const { id } = req.params;
     const currentPosition = req.params.position;

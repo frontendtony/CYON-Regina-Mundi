@@ -12,8 +12,8 @@ $('.ui.form').on('click', 'button', (event) => {
     $(elem).addClass('loading');
     let id = $(elem).parent().parent().find('select').val();
     let pos = $(elem).parent().parent().find('select').attr('name');
-    let url = '/apis/updatePosition/' + String(id) + '/' + String(pos);
-    $.getJSON(url).then(data => {
+    let url = '/api/updateposition/' + String(id) + '/' + String(pos);
+    $.ajax({ url, method: 'PUT' }).then(data => {
       if (data.status) {
         $(`<div class="ui positive message container">
           <i class="close icon"></i>

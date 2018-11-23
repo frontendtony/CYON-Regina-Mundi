@@ -3,8 +3,7 @@
 $('select').on('change', () => {
   $(".loader").removeClass("disabled").addClass("active");
   let month = $('select').val();
-  $.getJSON('/apis/birthdays/' + month)
-  .then(data => {
+  $.getJSON(`/api/birthdays/${month}`).done(data => {
     data.sort((a,b) => a.firstname - b.firstname);
     $('tbody').empty();
     data.forEach((elem) => {
