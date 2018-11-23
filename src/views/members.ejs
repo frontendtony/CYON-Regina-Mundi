@@ -7,21 +7,24 @@
 
 <!-- President & Vice -->
 <div class='ui centered cards' style='margin: 20px'>
-  <div class="ui card" style='margin: 20px'>
-    <div class="image">
-      <img src='<%=president["image"] %>'>
+  <% if (president) { %>
+    <% const { _id, image, firstname, lastname } = president %>
+    <div class="ui card" style='margin: 20px'>
+      <div class="image">
+        <img src='<%= image %>'>
+      </div>
+      <div class="content capitalize">
+        <div class="header"><%= firstname %> <%= lastname %></div>
+        <div class="meta">President</div>
+      </div>
+      <a class="ui large teal bottom attached button" href="/members/<%= _id %>">
+        <i class="user icon"></i>
+        View Profile
+      </a>
     </div>
-    <div class="content capitalize">
-      <div class="header"><%= president['firstname'] %> <%= president['lastname'] %></div>
-      <div class="meta">President</div>
-    </div>
-    <a class="ui large teal bottom attached button" href="/members/<%= president['_id'] %>">
-      <i class="user icon"></i>
-      View Profile
-    </a>
-  </div>
+  <% } %>
 
-  <% if(vicePresident){ %>
+  <% if (vicePresident) { %>
     <% const { _id, image, firstname, lastname } = vicePresident %>
     <div class="ui card" style='margin: 20px'>
       <div class="image">
@@ -44,15 +47,15 @@
 
 <div class='ui padded container'>
   <div class="ui four raised doubling cards">
-    <% if(queen){ %>
-      <% const { _id, image, firstname, lastname, currentPosition } = queen %>
+    <% if (queen) { %>
+      <% const { _id, image, firstname, lastname } = queen %>
       <div class="ui card">
         <div class="image">
           <img src='<%= image %>'>
         </div>
         <div class="content capitalize">
           <div class="header"><%= firstname %> <%= lastname %></div>
-          <div class="meta"><%= currentPosition %></div>
+          <div class="meta">queen</div>
         </div>
         <a class="ui large teal bottom attached button"
           href="/members/<%= _id %>">
