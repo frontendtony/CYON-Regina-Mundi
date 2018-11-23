@@ -45,7 +45,8 @@ const imageTransform = (url) => {
 }
 
 router.get('/members', isLoggedIn, async (req, res) => {
-  const members = await User.find().exec();
+  const filter = req.user.isSuperAdmin ? {} : { verified: true };
+  const members = await User.find(filter).exec();
   const users = await members.map((member) => {
     const newObj = member._doc;
     newObj.image = imageTransform(member.imageId);

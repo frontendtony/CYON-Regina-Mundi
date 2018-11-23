@@ -22,15 +22,17 @@
   </div>
 
   <% if(vicePresident){ %>
+    <% const { _id, image, firstname, lastname } = vicePresident %>
     <div class="ui card" style='margin: 20px'>
       <div class="image">
-        <img src='<%= vicePresident["image"] %>'>
+        <img src='<%= image %>'>
       </div>
       <div class="content capitalize">
-        <div class="header"><%= vicePresident['firstname'] %> <%= vicePresident['lastname'] %></div>
+        <div class="header"><%= firstname %> <%= lastname %></div>
         <div class="meta">Vice President</div>
       </div>
-      <a class="ui large teal bottom attached button" href="/members/<%= vicePresident['_id'] %>">
+      <a class="ui large teal bottom attached button"
+        href="/members/<%= _id %>">
         <i class="user icon"></i>
         View Profile
       </a>
@@ -42,34 +44,40 @@
 
 <div class='ui padded container'>
   <div class="ui four raised doubling cards">
-    <div class="ui card">
-      <div class="image">
-        <img src='<%= queen.image %>'>
-      </div>
-      <div class="content capitalize">
-        <div class="header"><%= queen.firstname %> <%= queen.lastname %></div>
-        <div class="meta"><%= queen.currentPosition %></div>
-      </div>
-      <a class="ui large teal bottom attached button" href="/members/<%= queen['_id'] %>">
-        <i class="user icon"></i>
-        View Profile
-      </a>
-    </div>
-    <% for(let exec of executives){ %>
+    <% if(queen){ %>
+      <% const { _id, image, firstname, lastname, currentPosition } = queen %>
       <div class="ui card">
         <div class="image">
-          <img src='<%= exec.image %>'>
+          <img src='<%= image %>'>
         </div>
         <div class="content capitalize">
-          <div class="header"><%= exec.firstname %> <%= exec.lastname %></div>
-          <div class="meta"><%= exec.currentPosition %></div>
+          <div class="header"><%= firstname %> <%= lastname %></div>
+          <div class="meta"><%= currentPosition %></div>
         </div>
-        <a class="ui large teal bottom attached button" href="/members/<%= exec['_id'] %>">
+        <a class="ui large teal bottom attached button"
+          href="/members/<%= _id %>">
           <i class="user icon"></i>
           View Profile
         </a>
       </div>
     <% } %>
+    <% executives.forEach(exec => { %>
+      <% const { _id, image, firstname, lastname, currentPosition } = exec %>
+      <div class="ui card">
+        <div class="image">
+          <img src='<%= image %>'>
+        </div>
+        <div class="content capitalize">
+          <div class="header"><%= firstname %> <%= lastname %></div>
+          <div class="meta"><%= currentPosition %></div>
+        </div>
+        <a class="ui large teal bottom attached button"
+          href="/members/<%= _id %>">
+          <i class="user icon"></i>
+          View Profile
+        </a>
+      </div>
+    <% }) %>
   </div>
 </div>
 
@@ -83,20 +91,21 @@
 <!-- Members -->
 <div class='ui padded container'>
   <div class="ui five raised doubling cards">
-    <% for(let member of members){ %>
-        <div class="ui card">
-          <div class="image">
-            <img src='<%= member.image %>'>
-          </div>
-          <div class="content capitalize">
-            <div class="header"><%= member.firstname %> <%= member.lastname %></div>
-          </div>
-          <a class="ui large teal bottom attached button" href="/members/<%= member['_id'] %>">
-            <i class="user icon"></i>
-            View Profile
-          </a>
+    <% members.forEach(member => { %>
+      <% const { _id, image, firstname, lastname } = member %>
+      <div class="ui card">
+        <div class="image">
+          <img src='<%= image %>'>
         </div>
-    <% } %>
+        <div class="content capitalize">
+          <div class="header"><%= firstname %> <%= lastname %></div>
+        </div>
+        <a class="ui large teal bottom attached button" href="/members/<%= _id %>">
+          <i class="user icon"></i>
+          View Profile
+        </a>
+      </div>
+    <% }) %>
   </div>
 </div>
 
