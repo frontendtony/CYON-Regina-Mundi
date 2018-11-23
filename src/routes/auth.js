@@ -23,14 +23,14 @@ router.post('/auth/login', (req, res, next) => {
       if (error) { return next(error); }
       return req.flash('success', 'You have been successfully logged in');
     });
-    return res.redirect('/');
+    return res.redirect('back');
   })(req, res, next);
 });
 
 router.get('/auth/signup', (req, res) => {
   if (req.user) {
     req.flash('error', 'You are already logged in');
-    return res.redirect('/');
+    return res.redirect('back');
   }
   return res.render('register', { states });
 });
