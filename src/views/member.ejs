@@ -1,8 +1,9 @@
 <% include ./partials/header %>
 <link rel="stylesheet" type="text/css" href='/stylesheets/member.css'>
 
-<% const { firstname, lastname, image, phone, email, birthday,
-  state, currentPosition, occupation, relationshipStatus } = member %>
+<% const { _id, firstname, lastname, image, phone, email, birthday,
+  state, currentPosition, occupation, relationshipStatus, isAdmin,
+  verified } = member %>
 <img
   class="ui centered rounded large bodered image" src="<%= image %>"
   alt="<%= `${firstname} ${lastname}` %>"
@@ -58,8 +59,24 @@
         <div class="column capitalize"><%= occupation %></div>
       </div>
     </div>
+
+    <% if(currentUser && currentUser.isSuperAdmin){ %>
+      <% if(!verified){ %>
+        <button class="ui teal labeled icon basic button" id="confirm" data-id="<%= _id %>">
+          <i class="check icon"></i>
+          Confirm
+        </button>
+      <% } %>
+      <% if(!isAdmin){ %>
+        <button class="ui orange labeled icon basic button" id="admin" data-id="<%= _id %>">
+          <i class="user secret icon"></i>
+          Make Admin
+        </button>
+      <% } %>
+    <% } %>
     
   </div>
 </div>
 
+<script src='/js/member.js'></script>
 <% include ./partials/footer %>
