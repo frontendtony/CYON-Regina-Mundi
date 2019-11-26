@@ -62,7 +62,7 @@ router.get('/auth/logout', (req, res) => {
 });
 
 router.get('/auth/passwordreset', (req, res) => {
-  res.render('passwordreset');
+  res.render('passwordReset');
 });
 
 router.post('/auth/passwordreset', (req, res, next) => {
