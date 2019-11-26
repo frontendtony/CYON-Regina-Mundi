@@ -105,6 +105,10 @@ router.post('/auth/passwordreset', (req, res, next) => {
           + 'If you did not request this, please ignore this email and your password will remain unchanged.\n',
       };
       smtpTransport.sendMail(mailOptions, (err) => {
+        if (err) {
+          req.flash('error', 'There was an error sending the password recovery email, please contact the system admin');
+          return res.redirect('back');
+        }
         req.flash('success', `An e-mail has been sent to ${user.email} with further instructions.`);
         done(err, 'done');
       });
